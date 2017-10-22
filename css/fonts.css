@@ -1,0 +1,23 @@
+/**
+ * @version beta
+ *
+ * marinara_blog font styling.
+ *
+ * @package marinara_blog
+ */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;	
+	font-weight: 900;
+}
+body, p, blockquote {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+.font-family-roboto {
+	font-family: 'Roboto', sans-serif !important;
+	font-weight: 400;
+}
