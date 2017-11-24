@@ -7,24 +7,6 @@
  * @package marinara_blog
  */
 ?>
-<style type="text/css">
-.author-listing-wrapper {
-	margin-top: 15px;
-}
-.author-row {
-    margin-bottom: 15px;
-}
-.author-avatar-col img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.author-row .author-name {
-	margin-top: 0px;
-}
-@media (min-width: 768px){
-}
-</style>
 <div class="author-listing-wrapper clearfix">
 <?php
 $order = 'ASC';
@@ -77,8 +59,7 @@ foreach( $authors as $author ){
 		</div>
 	</div>
 <?php }
-if(empty($authors)) {
+if( empty( $authors ) ) {
   echo '<div class="no-authors-col col-xs-12"><h4>There are no users with the role: Author</h4></div>';
-}
-?>
+} ?>
 </div><!-- end of <div class="author-listing-wrapper"> -->

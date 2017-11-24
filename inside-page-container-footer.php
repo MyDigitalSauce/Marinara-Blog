@@ -10,7 +10,7 @@
 <div class="clearfix"></div>
 <footer class="site-footer footer-row row">
   <div class="footer-logo-col col-xs-12 text-center">
-    <?php $footerImg = get_theme_mod('footer_image'); if (isset($footerImg)): ?>
+    <?php $footerImg = get_theme_mod('footer_image'); if ( $footerImg !== "" ): ?>
       <img src="<?php echo $footerImg; ?>" alt="<?php bloginfo('name'); ?>" class="footer-logo">
     <?php else: ?>
       <h2 class="footer-bloginfo-name footer-clr"><?php echo bloginfo('name'); ?></h2>
@@ -38,6 +38,6 @@
 		&copy; <span class="currYear"><?php echo date('Y'); ?></span> <?php echo bloginfo('name'); ?>
   </div>
   <div class="copyright-col col-xs-12 text-center footer-clr">
-    <a href="http://wordpress.org/" title="A Semantic Personal Publishing Platform" rel="generator" target="_blank">Proudly powered by WordPress</a> | Theme: <a href="https://mydigitalsauce.com/sauces/marinara-blog" target="_blank" title="A WordPress Blog Theme">Marinara Blog</a>
+    <a href="http://wordpress.org/" title="A Semantic Personal Publishing Platform" rel="generator" target="_blank">Proudly powered by WordPress</a> | Theme: <a href="https://mydigitalsauce.com/products/marinara-blog" target="_blank" title="A WordPress Blog Theme">Marinara Blog</a>
   </div>
 </footer><!-- end of <footer class="site-footer footer-row row"> -->

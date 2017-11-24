@@ -25,35 +25,35 @@ add_action( 'customize_preview_init', 'marinara_blog_customize_preview_js' );
 function marinara_blog_register_theme_customizer( $wp_customize ) {
   // echo '<pre>';  var_dump( $wp_customize );  echo '</pre>';
   // Customize title and tagline sections and labels
-  $wp_customize->get_section('title_tagline')->title = __('Site: Name and Description', 'marinara_blogthemecustomizer');  
-  $wp_customize->get_control('blogname')->label = __('Site Name', 'marinara_blogthemecustomizer');  
-  $wp_customize->get_control('blogdescription')->label = __('Site Description', 'marinara_blogthemecustomizer');  
+  $wp_customize->get_section('title_tagline')->title = __('Site: Name and Description', 'marinara_blog');  
+  $wp_customize->get_control('blogname')->label = __('Site Name', 'marinara_blog');  
+  $wp_customize->get_control('blogdescription')->label = __('Site Description', 'marinara_blog');  
   $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
   $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
   // Customize the Front Page Settings
-  $wp_customize->get_section('static_front_page')->title = __('Site: Front Page', 'marinara_blogthemecustomizer');
+  $wp_customize->get_section('static_front_page')->title = __('Site: Front Page', 'marinara_blog');
   $wp_customize->get_section('static_front_page')->priority = 20;
-  $wp_customize->get_control('show_on_front')->label = __('Choose Front Page', 'marinara_blogthemecustomizer');  
-  $wp_customize->get_control('page_on_front')->label = __('Select Front Page', 'marinara_blogthemecustomizer');  
-  $wp_customize->get_control('page_for_posts')->label = __('Select Blog Page', 'marinara_blogthemecustomizer'); 
+  $wp_customize->get_control('show_on_front')->label = __('Choose Front Page', 'marinara_blog');  
+  $wp_customize->get_control('page_on_front')->label = __('Select Front Page', 'marinara_blog');  
+  $wp_customize->get_control('page_for_posts')->label = __('Select Blog Page', 'marinara_blog'); 
   // Customize Background Settings
-  $wp_customize->get_section('background_image')->title = __('Site: Background Styles', 'marinara_blogthemecustomizer');  
+  $wp_customize->get_section('background_image')->title = __('Site: Background Styles', 'marinara_blog');  
   $wp_customize->get_control('background_color')->section = 'background_image';
   // Customize Header Image Settings
   $wp_customize->add_section( 'header_text_styles' , array(
-    'title'      => __('Header: Text Colors','marinara_blogthemecustomizer'), 
+    'title'      => __('Header: Text Colors','marinara_blog'), 
     'priority'   => 50    
   ) );
   $wp_customize->remove_control('display_header_text');
   // $wp_customize->get_control('display_header_text')->section = 'header_text_styles';
-  // $wp_customize->get_control('display_header_text')->label = __('Display Header Description', 'marinara_blogthemecustomizer'); 
+  // $wp_customize->get_control('display_header_text')->label = __('Display Header Description', 'marinara_blog'); 
   $wp_customize->get_control('header_textcolor')->section = 'header_text_styles'; 
   $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage'; 
   // Add Page Template: Home Settings
   /* General Settings */
   /* General Settings > Google Analytics Textfield */
   $wp_customize->add_section( 'goo_analytics_field' , array(
-  'title'      => __('Site: Google Analytics','marinara_blogthemecustomizer'), 
+  'title'      => __('Site: Google Analytics','marinara_blog'), 
   'panel'      => 'general_settings',
   'priority'   => 40    
   ) );  
@@ -68,7 +68,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'goo_analytics',
           array(
-              'label'          => __( 'Add Google Analytics Code here. Remove the &#60;script>&#60;/script> tags', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Add Google Analytics Code here. Remove the &#60;script>&#60;/script> tags', 'marinara_blog' ),
               'section'        => 'goo_analytics_field',
               'settings'       => 'google_analytics_code',
               'type'           => 'textarea'
@@ -76,7 +76,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
       )
   );
   $wp_customize->add_section( 'header_settings' , array(
-    'title'      => __('Header: Settings','marinara_blogthemecustomizer'), 
+    'title'      => __('Header: Settings','marinara_blog'), 
     'panel'      => 'general_settings',
     'priority'   => 60    
   ) );
@@ -84,19 +84,20 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'enable_user_col',
         array(
             'type'       => 'theme_mod',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
         )
     );
     $wp_customize->add_control(
         'header_enable_user_col',
         array(
             'settings' => 'enable_user_col',
-            'label'    => __('Enable Header User Column. This displays a header column with current user actions.'),
+            'label'    => __('Enable Header User Column. This displays a header column with current user actions.', 'marinara_blog' ),
             'section'  => 'header_settings',
             'type'     => 'checkbox',
         )
     );
   $wp_customize->add_section( 'blog_settings' , array(
-    'title'      => __('Blog: Settings','marinara_blogthemecustomizer'), 
+    'title'      => __('Blog: Settings','marinara_blog'), 
     'panel'      => 'general_settings',
     'priority'   => 70    
   ) );
@@ -104,19 +105,20 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'show_by_author_on_blog_listing',
         array(
             'type'       => 'theme_mod',
+'sanitize_callback' => 'marinara_blog_sanitize_text' 
         )
     );
     $wp_customize->add_control(
         'blog_show_by_author_on_blog_listing',
         array(
             'settings' => 'show_by_author_on_blog_listing',
-            'label'    => __('Show by Author on Blog Listings.'),
+            'label'    => __( 'Show by Author on Blog Listings.', 'marinara_blog' ),
             'section'  => 'blog_settings',
             'type'     => 'checkbox',
         )
     );
   $wp_customize->add_section( 'page_temp_home_settings' , array(
-    'title'      => __('Page Template: Home Settings','marinara_blogthemecustomizer'), 
+    'title'      => __('Page Template: Home Settings','marinara_blog'), 
     'panel'      => 'general_settings',
     'priority'   => 80    
   ) );
@@ -124,27 +126,28 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'enable_author_tab',
         array(
             'type'       => 'theme_mod',
+'sanitize_callback' => 'marinara_blog_sanitize_text' 
         )
     );
     $wp_customize->add_control(
         'page_temp_home_enable_author_tab',
         array(
             'settings' => 'enable_author_tab',
-            'label'    => __('Enable Author Tab. This displays a tag that outputs the users with the role: author.'),
+            'label'    => __( 'Enable Author Tab. This displays a tag that outputs the users with the role: author.', 'marinara_blog' ),
             'section'  => 'page_temp_home_settings',
             'type'     => 'checkbox',
         )
     );
   /* General Settings > Add Contact Info Settings */
   $wp_customize->add_section( 'contact_social_info' , array(
-  'title'      => __('Footer: Contact & Social Info','marinara_blogthemecustomizer'), 
+  'title'      => __('Footer: Contact & Social Info','marinara_blog'), 
   'panel'      => 'general_settings',
   'priority'   => 100    
   ) );  
   $wp_customize->add_setting(
     'marinara_blog_phone_num',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -154,7 +157,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'phone_info',
           array(
-              'label'          => __( 'Phone Number (ex: 1-949-555-5555)', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Phone Number (ex: 1-949-555-5555)', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_phone_num',
               'type'           => 'text'
@@ -164,7 +167,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_email',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -174,7 +177,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'email_info',
           array(
-              'label'          => __( 'Email', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Email', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_email',
               'type'           => 'text'
@@ -184,7 +187,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_twitter',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -194,7 +197,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'twitter_info',
           array(
-              'label'          => __( 'Twitter URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Twitter URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_twitter',
               'type'           => 'text'
@@ -204,7 +207,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_facebook',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -214,7 +217,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'facebook_info',
           array(
-              'label'          => __( 'Facebook URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Facebook URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_facebook',
               'type'           => 'text'
@@ -224,7 +227,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_instagram',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -234,7 +237,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'instagram_info',
           array(
-              'label'          => __( 'Instagram URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Instagram URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_instagram',
               'type'           => 'text'
@@ -244,7 +247,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_google_plus',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -254,7 +257,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'google_plus_info',
           array(
-              'label'          => __( 'Google Plus URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Google Plus URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_google_plus',
               'type'           => 'text'
@@ -264,7 +267,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_linkedin',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -274,7 +277,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'linkedin_info',
           array(
-              'label'          => __( 'Linkedin URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Linkedin URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_linkedin',
               'type'           => 'text'
@@ -284,7 +287,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_pinterest',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -294,7 +297,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'pinterest_info',
           array(
-              'label'          => __( 'Pinterest URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Pinterest URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_pinterest',
               'type'           => 'text'
@@ -304,7 +307,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_tumblr',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -314,7 +317,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'tumblr_info',
           array(
-              'label'          => __( 'Tumblr URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Tumblr URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_tumblr',
               'type'           => 'text'
@@ -324,7 +327,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_tumblr',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -334,7 +337,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'tumblr_info',
           array(
-              'label'          => __( 'Tumblr URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Tumblr URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_tumblr',
               'type'           => 'text'
@@ -344,7 +347,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_youtube',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -354,7 +357,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'youtube_info',
           array(
-              'label'          => __( 'YouTube URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'YouTube URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_youtube',
               'type'           => 'text'
@@ -364,7 +367,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_soundcloud',
     array(
-        'default'           => __( '', 'marinara_blogthemecustomizer' ),
+        'default'           => __( '', 'marinara_blog' ),
         'transport'         => 'postMessage',
         'sanitize_callback' => 'marinara_blog_sanitize_text'          
     )
@@ -374,75 +377,26 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'soundcloud_info',
           array(
-              'label'          => __( 'SoundCloud URL', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'SoundCloud URL', 'marinara_blog' ),
               'section'        => 'contact_social_info',
               'settings'       => 'marinara_blog_soundcloud',
               'type'           => 'text'
           )
       )
   );
-  // Add Image Hover Settings Section to Design Settings Panel
-  // $wp_customize->add_section( 'image_hover_styles' , array(
-  // 'title'      => __('Image Hover Styles','marinara_blogthemecustomizer'), 
-  // 'panel'      => 'design_settings',
-  // 'priority'   => 100    
-  // ) );  
-  // $wp_customize->add_setting(
-  //   'marinara_blog_mask_color',
-  //   array(
-  //       'default'         => '#f6f6f6',
-  //       'transport'       => 'postMessage'
-  //   )
-  // );
-  // $wp_customize->add_control(
-  //    new WP_Customize_Color_Control(
-  //        $wp_customize,
-  //        'custom_image_hover_mask_color',
-  //        array(
-  //            'label'      => __( 'Text Color', 'marinara_blogthemecustomizer' ),
-  //            'section'    => 'image_hover_styles',
-  //            'settings'   => 'marinara_blog_mask_color' 
-  //        )
-  //    )
-  // ); 
-  // $wp_customize->add_setting(
-  //   'marinara_blog_image_hover_style',
-  //   array(
-  //       'default'         => 'style1',
-  //       'transport'       => 'postMessage'
-  //   )
-  // );
-  // $wp_customize->add_control(
-  //     new WP_Customize_Control(
-  //         $wp_customize,
-  //         'custom_image_hover_style',
-  //         array(
-  //             'label'          => __( 'Hover Style', 'marinara_blogthemecustomizer' ),
-  //             'section'        => 'image_hover_styles',
-  //             'settings'       => 'marinara_blog_image_hover_style',
-  //             'type'           => 'select',
-  //             'choices'        => array(
-  //               'style1'   => 'style1',
-  //               'style2'   => 'style2',
-  //               'style3'   => 'style3',
-  //               'style4'   => 'style4',
-  //               'style5'   => 'style5'
-  //             )
-  //         )
-  //     )       
-  // );
 
   /* Design Settings > Site > Text Colors */
   $wp_customize->add_section( 'text_colors' , array(
-  'title'      => __('Site: Text Colors','marinara_blogthemecustomizer'), 
+  'title'      => __('Site: Text Colors','marinara_blog'), 
   'panel'      => 'design_settings',
   'priority'   => 20    
   ) );
   $wp_customize->add_setting(
     'primary_color',
     array(
-        'default'         => '#000',
-        'transport'       => 'postMessage'
+        'default'         => '#444',
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text'  
     )
   );
   $wp_customize->add_control(
@@ -450,7 +404,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_primary_color',
          array(
-             'label'      => __( 'Site: Primary Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Site: Primary Text Color', 'marinara_blog' ),
              'section'    => 'text_colors',
              'settings'   => 'primary_color' 
          )
@@ -459,8 +413,9 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'secondary_color',
     array(
-        'default'         => '#5d2884',
-        'transport'       => 'postMessage'
+        'default'         => '#f50',
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text'  
     )
   );
   $wp_customize->add_control(
@@ -468,7 +423,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_secondary_color',
          array(
-             'label'      => __( 'Site: Secondary Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Site: Secondary Text Color', 'marinara_blog' ),
              'section'    => 'text_colors',
              'settings'   => 'secondary_color' 
          )
@@ -477,8 +432,9 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'highlight_color',
     array(
-        'default'         => '#740088',
-        'transport'       => 'postMessage'
+        'default'         => '#f50',
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text'  
     )
   );
   $wp_customize->add_control(
@@ -486,7 +442,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_highlight_color',
          array(
-             'label'      => __( 'Site: Highlight Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Site: Highlight Color', 'marinara_blog' ),
              'section'    => 'text_colors',
              'settings'   => 'highlight_color' 
          )
@@ -494,14 +450,14 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   ); 
   /* Design Settings > Site > Custom CSS */
   $wp_customize->add_section( 'custom_css_field' , array(
-  'title'      => __('Site: Custom CSS','marinara_blogthemecustomizer'), 
+  'title'      => __('Site: Custom CSS','marinara_blog'), 
   'panel'      => 'design_settings',
   'priority'   => 30    
   ) );  
   $wp_customize->add_setting(
     'marinara_blog_custom_css',
     array(          
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'marinara_blog_sanitize_textarea'          
     )
   );
   $wp_customize->add_control(
@@ -509,7 +465,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
           $wp_customize,
           'custom_css',
           array(
-              'label'          => __( 'Add custom site-wide CSS here', 'marinara_blogthemecustomizer' ),
+              'label'          => __( 'Add custom site-wide CSS here', 'marinara_blog' ),
               'section'        => 'custom_css_field',
               'settings'       => 'marinara_blog_custom_css',
               'type'           => 'textarea'
@@ -520,8 +476,9 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'header_highlight_clr',
     array(
-        'default'         => '#5d2884',
-        'transport'       => 'postMessage'
+        'default'         => '#444',
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -529,7 +486,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_header_highlight_clr',
          array(
-             'label'      => __( 'Header Highlight Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Header Highlight Text Color', 'marinara_blog' ),
              'section'    => 'header_text_styles',
              'settings'   => 'header_highlight_clr' 
          )
@@ -537,15 +494,16 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   ); 
   /* Design Settings > Page > Banner */
   $wp_customize->add_section( 'page_banner' , array(
-  'title'      => __('Page: Banner','marinara_blogthemecustomizer'), 
+  'title'      => __('Page: Banner','marinara_blog'), 
   'panel'      => 'design_settings',
   'priority'   => 60    
   ) );  
   $wp_customize->add_setting(
     'page_banner_cta_bg',
     array(
-        'default'         => '#000',
-        'transport'       => 'postMessage'
+        'default'         => '#444',
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -553,7 +511,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_page_banner_cta_bg',
          array(
-             'label'      => __( 'Page Banner CTA Background', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Page Banner CTA Background', 'marinara_blog' ),
              'section'    => 'page_banner',
              'settings'   => 'page_banner_cta_bg' 
          )
@@ -563,7 +521,8 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'page_banner_cta_clr',
     array(
         'default'         => '#fff',
-        'transport'       => 'postMessage'
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -571,7 +530,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_page_banner_cta_clr',
          array(
-             'label'      => __( 'Page Banner CTA Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Page Banner CTA Text Color', 'marinara_blog' ),
              'section'    => 'page_banner',
              'settings'   => 'page_banner_cta_clr' 
          )
@@ -579,7 +538,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   );   
   /* Design Settings > Blog > Blog Title */
   $wp_customize->add_section( 'blog_styles' , array(
-  'title'      => __('Blog: Styles','marinara_blogthemecustomizer'), 
+  'title'      => __('Blog: Styles','marinara_blog'), 
   'panel'      => 'design_settings',
   'priority'   => 70    
   ) );
@@ -587,7 +546,8 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'blog_title_clr',
     array(
         'default'         => '#444',
-        'transport'       => 'postMessage'
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -595,7 +555,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_blog_title_clr',
          array(
-             'label'      => __( 'Blog Post Title Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Blog Post Title Text Color', 'marinara_blog' ),
              'section'    => 'blog_styles',
              'settings'   => 'blog_title_clr' 
          )
@@ -603,7 +563,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   );  
   /* Design Settings > Footer > Styles */
   $wp_customize->add_section( 'footer_styles' , array(
-  'title'      => __('Footer: Styles','marinara_blogthemecustomizer'), 
+  'title'      => __('Footer: Styles','marinara_blog'), 
   'panel'      => 'design_settings',
   'priority'   => 80    
   ) );  
@@ -611,6 +571,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'footer_image',
     array(
     'default'         => '',
+    'sanitize_callback' => 'marinara_blog_sanitize_text' 
     // 'default'         => get_template_directory_uri() . '/img/logo.png',
     //'transport'       => 'postMessage'
     )
@@ -620,7 +581,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_footer_image',
          array(
-             'label'      => __( 'Add an image to the Footer.', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Add an image to the Footer.', 'marinara_blog' ),
              'section'    => 'footer_styles',
              'settings'   => 'footer_image',
              'context'    => 'footer-image' 
@@ -631,7 +592,8 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'footer_clr',
     array(
         'default'         => '#fff',
-        'transport'       => 'postMessage'
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -639,7 +601,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_footer_clr',
          array(
-             'label'      => __( 'Footer Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Footer Text Color', 'marinara_blog' ),
              'section'    => 'footer_styles',
              'settings'   => 'footer_clr' 
          )
@@ -649,7 +611,8 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'footer_highlight_clr',
     array(
         'default'         => '#fff',
-        'transport'       => 'postMessage'
+        'transport'       => 'postMessage',
+        'sanitize_callback' => 'marinara_blog_sanitize_text' 
     )
   );
   $wp_customize->add_control(
@@ -657,7 +620,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
          $wp_customize,
          'custom_footer_highlight_clr',
          array(
-             'label'      => __( 'Footer Highlight Text Color', 'marinara_blogthemecustomizer' ),
+             'label'      => __( 'Footer Highlight Text Color', 'marinara_blog' ),
              'section'    => 'footer_styles',
              'settings'   => 'footer_highlight_clr' 
          )
@@ -667,14 +630,14 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_panel( 'general_settings', array(
     'priority' => 10,
     'theme_supports' => '',
-    'title' => __( 'General Settings', 'marinara_blogthemecustomizer' ),
-    'description' => __( 'Controls the basic settings for the theme.', 'marinara_blogthemecustomizer' ),
+    'title' => __( 'General Settings', 'marinara_blog' ),
+    'description' => __( 'Controls the basic settings for the theme.', 'marinara_blog' ),
   ) );
   $wp_customize->add_panel( 'design_settings', array(
     'priority' => 20,
     'theme_supports' => '',
-    'title' => __( 'Design Settings', 'marinara_blogthemecustomizer' ),
-    'description' => __( 'Controls the basic design settings for the theme.', 'marinara_blogthemecustomizer' ),
+    'title' => __( 'Design Settings', 'marinara_blog' ),
+    'description' => __( 'Controls the basic design settings for the theme.', 'marinara_blog' ),
   ) ); 
   // Assign sections to panels
   $wp_customize->get_section('title_tagline')->panel = 'general_settings';      
@@ -684,7 +647,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->get_section('background_image')->priority = 10;
   $wp_customize->get_section('header_image')->panel = 'design_settings';
   $wp_customize->get_section('header_image')->priority = 40;
-  $wp_customize->get_section('header_image')->title = __('Header: Image', 'marinara_blogthemecustomizer');  
+  $wp_customize->get_section('header_image')->title = __('Header: Image', 'marinara_blog');  
 }
 function admin_customizable_theme_css(){
   ?>
@@ -703,7 +666,7 @@ function admin_customizable_theme_css(){
   if ($siteBgClr){
     $siteBgClr = '#' . $siteBgClr;
   } else {
-    $siteBgClr = '#000';
+    $siteBgClr = '#444';
   }
   $siteBg = get_background_image();
   if( ! ( $siteBg ) ) {
@@ -713,23 +676,22 @@ function admin_customizable_theme_css(){
   if (get_theme_mod('primary_color')){
     $primaryClr = get_theme_mod('primary_color');
   } else {
-    $primaryClr = '#333';   
+    $primaryClr = '#444';   
   }
   if (get_theme_mod('secondary_color')){
     $secondaryClr = get_theme_mod('secondary_color');
   } else {
-    $secondaryClr = '#740088';    
+    $secondaryClr = '#f50';    
   }
   /* Site > Text Colors > Highlight */
   if (get_theme_mod('highlight_color')){
     $highlightClr = get_theme_mod('highlight_color');
   } else {
-    $highlightClr = '#740088';    
+    $highlightClr = '#f50';    
   }
   /* background */
-  $primaryBg = '#333';
-//  $secondaryBg = '#740088';
-  $secondaryBg = '#0a9600';
+  $primaryBg = '#444';
+  $secondaryBg = '#f50';
   /* btns */
   $primaryBtn = '';
   $secondaryBtn = '';
@@ -738,12 +700,12 @@ function admin_customizable_theme_css(){
   if (get_theme_mod('header_textcolor')){
     $headerClr = '#' . get_theme_mod('header_textcolor');
   } else {
-    $headerClr = '#000';    
+    $headerClr = '#444';    
   }
   if (get_theme_mod('header_highlight_clr')){
     $headerHighlightClr = get_theme_mod('header_highlight_clr');
   } else {
-    $headerHightlightClr = '#5d2884';    
+    $headerHightlightClr = '#f50';    
   }
   $headerBg = '';
 
@@ -751,7 +713,7 @@ function admin_customizable_theme_css(){
   if (get_theme_mod('page_banner_cta_bg')){
     $pageBannerCTABg = get_theme_mod('page_banner_cta_bg');
   } else {
-    $pageBannerCTABg = '#000';    
+    $pageBannerCTABg = '#444';    
   }
   if (get_theme_mod('page_banner_cta_clr')){
     $pageBannerCTAClr = get_theme_mod('page_banner_cta_clr');
@@ -813,6 +775,8 @@ function admin_customizable_theme_css(){
   blockquote {
       border-left: 5px solid <?php echo $highlightClr; ?>;
   }
+  .commentlist .bypostauthor { border-top: 10px solid <?php echo $highlightClr; ?>; }
+  .commentlist li ul.children li.bypostauthor { border-top: 10px solid <?php echo $highlightClr; ?>; }
   #comments input[type="submit"]:hover,
   #comments input[type="submit"]:focus,
   form input[type="submit"]:hover

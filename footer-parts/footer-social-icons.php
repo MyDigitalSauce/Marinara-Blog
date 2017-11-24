@@ -8,7 +8,7 @@
  */
 $phoneNum = get_theme_mod( 'marinara_blog_phone_num');
 $email = get_theme_mod('marinara_blog_email');
-$twiiterURL = get_theme_mod('marinara_blog_twitter');
+$twitterURL = get_theme_mod('marinara_blog_twitter');
 $facebookURL = get_theme_mod('marinara_blog_facebook');
 $instaURL = get_theme_mod('marinara_blog_instagram');
 $gplusURL = get_theme_mod('marinara_blog_google_plus');
@@ -17,7 +17,7 @@ $pinterestURL = get_theme_mod('marinara_blog_pinterest');
 $tumblrURL = get_theme_mod('marinara_blog_tumblr');
 $youtubeURL = get_theme_mod('marinara_blog_youtube');
 $soundcloudURL = get_theme_mod('marinara_blog_soundcloud');
-if ($phoneNum != '' || $email != '' || $twiiterURL != '' || $facebookURL != '' || $instaURL != '' || $youtubeURL != '' || $soundcloudURL != ''): ?>
+if ($phoneNum != '' || $email != '' || $twitterURL != '' || $facebookURL != '' || $instaURL != '' || $youtubeURL != '' || $soundcloudURL != ''): ?>
   <div class="footer-social-icons">
     <?php if ($phoneNum): ?>
       <div class="phone-footer-social-icon">
@@ -27,7 +27,7 @@ if ($phoneNum != '' || $email != '' || $twiiterURL != '' || $facebookURL != '' |
       <div class="email-footer-social-icon">
         <a href="mailto:<?php echo $email; ?>" type="button" data-toggle="tooltip" data-placement="top" title="Email <?php bloginfo('name'); ?>"><i class="fa fa-envelope"></i></a>
       </div>
-    <?php endif; if ($twiiterURL): ?>
+    <?php endif; if ($twitterURL): ?>
     <div class="twitter-footer-social-icon">
       <a href="<?php echo $twitterURL; ?>" target="_blank" type="button" data-toggle="tooltip" data-placement="top" title="View <?php bloginfo('name'); ?> Twiiter"><i class="fa fa-twitter"></i></a>
     </div>

@@ -1,0 +1,7 @@
+Marinara Blog WP Theme Change Log
+
+v 1.0.6
+- Made theme ready for .org
+
+v 1.0.5
+- Added changelog.txt

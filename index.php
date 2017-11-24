@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package JarPhoto
+ * @package marinara_blog
  */
 get_header();
 $featImgURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );

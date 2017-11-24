@@ -13,7 +13,7 @@
 			<?php the_title( '<h2 class="post-title">', '</h2>' ); ?>
 		</div><!-- end of .single-header -->
 		<div class="single-meta">
-			<p>Posted in <i class="fa fa-th-list"></i> <?php /* display single categories */ the_terms( $post->ID, 'category', '', ', ', '' ); ?> by <?php echo get_avatar( get_the_author_meta('ID'), 24 ); ?> <?php the_author_posts_link(); ?> published on <i class="fa fa-clock-o"></i> <?php the_time( 'F j Y'); ?> </p>
+			<p>Posted in <i class="fa fa-th-list"></i> <?php /* display single categories */ the_terms( $post->ID, 'category', '', ', ', '' ); ?> by <?php echo get_avatar( get_the_author_meta('ID'), 24 ); ?> <?php the_author_posts_link(); ?> published on <i class="fa fa-clock-o"></i> <?php the_time( get_option( 'date_format' ) ); ?> </p>
 		</div><!-- end of .single-meta -->
 		<div class="single-content">
 			<?php

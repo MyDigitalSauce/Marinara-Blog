@@ -21,7 +21,7 @@
 				<?php endif; ?>
 				<div class="article-desc">
 					In <span class="category"><i class="fa fa-tag"></i>&nbsp;<?php the_category( ', ' ); ?></span>
-					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 				</div>
 	      	</div>
 		  	<div class="col-sm-7 col-xs-12">

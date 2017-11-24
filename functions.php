@@ -134,21 +134,27 @@ add_action( 'after_setup_theme', 'marinara_blog_content_width', 0 );
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function marinara_blog_widgets_init( $name, $id, $description) {
+function marinara_blog_register_sidebar( $name, $id, $description) {
 	register_sidebar( array(
-	  'name'          => esc_html__( $name, 'marinara_blog' ),
-	  'id'            => $id,
-	  'description'   => __($description),
-	  'before_widget' => '<div class="panel-group widget-group %2$s" id="accordion%1$s" role="tablist" aria-multiselectable="true"><div class="panel panel-default">',
-	  'after_widget'  => '</div></div></div></div>',
-	  'before_title'  => '<div class="panel-heading" role="tab" id="heading"><h4 class="panel-title"><a role="button" data-toggle="collapse" href="#collapse" aria-expanded="true" aria-controls="collapse">',
-	  'after_title'   => '<i class="fa fa-caret-down float-right"></i></a></h4></div><div id="collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading"><div class="panel-body">',
+		// 'name'          => esc_html__( $name, 'marinara_blog' ),
+		'name'			=> $name,
+		'id'            => $id,
+		// 'description'   => esc_html__( $description, 'marinara_blog'),
+		'description'	=> $description,
+		'before_widget' => '<div class="panel-group widget-group %2$s" id="accordion%1$s" role="tablist" aria-multiselectable="true"><div class="panel panel-default">',
+		'after_widget'  => '</div></div></div></div>',
+		'before_title'  => '<div class="panel-heading" role="tab" id="heading"><h4 class="panel-title"><a role="button" data-toggle="collapse" href="#collapse" aria-expanded="true" aria-controls="collapse">',
+		'after_title'   => '<i class="fa fa-caret-down float-right"></i></a></h4></div><div id="collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading"><div class="panel-body">',
 	) );
 }
-marinara_blog_widgets_init( 'Header Logged In User Options Dropdown', 'header-user-options-dropdown-widget', 'Displays in the header user dropdown are if a user is loged in.' );
-marinara_blog_widgets_init( 'Page Sidebar', 'page-sidebar-widget', 'Displays on the side of pages with a sidebar.' );
-marinara_blog_widgets_init( 'Single Sidebar', 'single-sidebar-widget', 'Displays on the side of single posts with a sidebar.' );
-marinara_blog_widgets_init( 'Author Sidebar', 'author-sidebar-widget', 'Displays on the side of author pages with sidebar.' );
+function marinara_blog_widgets_init() {
+	marinara_blog_register_sidebar( 'Page Sidebar', 'page-sidebar-widget', 'Displays on the side of pages with a sidebar.' );
+	marinara_blog_register_sidebar( 'Header Logged In User Options Dropdown', 'header-user-options-dropdown-widget', 'Displays in the header user dropdown are if a user is loged in.' );
+	marinara_blog_register_sidebar( 'Single Sidebar', 'single-sidebar-widget', 'Displays on the side of single posts with a sidebar.' );
+	marinara_blog_register_sidebar( 'Author Sidebar', 'author-sidebar-widget', 'Displays on the side of author pages with sidebar.' );
+}
+
+add_action( 'widgets_init', 'marinara_blog_widgets_init' );
 
 function marinara_blog_remove_widget_title( $widget_title ) {
 	if (!$widget_title):
@@ -159,16 +165,23 @@ function marinara_blog_remove_widget_title( $widget_title ) {
 }
 add_filter( 'widget_title', 'marinara_blog_remove_widget_title' );
 
+// function my_jquery_enqueue() {
+//    wp_deregister_script('jquery');
+//    wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, null);
+//    wp_enqueue_script('jquery');
+// }
+// if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+
 /**
  * Enqueue scripts and styles.
  */
 function marinara_blog_scripts() {
 
-	wp_enqueue_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
+	wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0.5');
 
-	wp_enqueue_style('marinara_blog-font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
+	wp_enqueue_style('marinara_blog-font-awesome', get_template_directory_uri() . 'font-awesome.min.css', array(), '1.0.5');
 
-	wp_enqueue_style('marinara_blog-google-fonts', '//fonts.googleapis.com/css?family=Roboto:400,700,900');
+	wp_enqueue_style('marinara_blog-google-fonts', get_template_directory_uri() . 'google-fonts.css', array(), '1.0.5');
 
 	wp_enqueue_style('local-fonts', get_template_directory_uri(). '/css/fonts.css');
 
@@ -177,13 +190,11 @@ function marinara_blog_scripts() {
     	'1.0.5'
     	);
 
-	wp_enqueue_script('jquery-lib', '//code.jquery.com/jquery-2.1.4.min.js');
+	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.5', true);
 
-	wp_enqueue_script('bootstrap-js', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js');
+	wp_enqueue_script( 'marinara_blog-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0.5', true );
 
-	wp_enqueue_script( 'marinara_blog-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
-	wp_enqueue_script( 'marinara_blog-general-theme-script', get_template_directory_uri() . '/js/theme-script.js', array(), '', true );
+	wp_enqueue_script( 'marinara_blog-general-theme-script', get_template_directory_uri() . '/js/theme-script.js', array('jquery'), '1.0.5', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -280,39 +291,20 @@ function marinara_blog_authors_func( $atts ){
 	 *
 	 * @package marinara_blog
 	 */
-	include( locate_template('shortcodes/shortcode-authors.php') );
+	// include( locate_template('shortcodes/shortcode-authors.php') );
+	get_template_part( 'shortcodes/shortcode', 'authors.php' );
 	$output_string = ob_get_contents();
 	ob_end_clean();
 	return $output_string; ?>
 <?php }
 add_shortcode('authors', 'marinara_blog_authors_func');
 
-/* Creates shortcode [meet_the_fockers orderby=""] */
-function marinara_blog_meet_the_fockers_func( $atts ){
-	ob_start();
-	/* orderby - Sort by 'ID', 'login', 'nicename', 'email', 'url', 'registered', 'display_name', 'post_count', 'include', or 'meta_value' (query must also contain a 'meta_key' - see WP_User_Query). */
-    $orderBy = 'nicename'; /* default val */
-    $a = shortcode_atts( array(
-        'orderby' => $orderBy,
-    ), $atts );
-    $orderBy = $a['orderby'];
-	/**
-	 *
-	 * @package marinara_blog
-	 */
-	include( locate_template('shortcodes/shortcode-meet-the-fockers.php') );
-	$output_string = ob_get_contents();
-	ob_end_clean();
-	return $output_string; ?>
-<?php }
-add_shortcode('meet_the_fockers', 'marinara_blog_meet_the_fockers_func');
-
 /*BreadCrumb ShortCode
 * Creates [breadcrumb]
 ======================================== */
 /* BreadCrumb Function
 ======================================== */
-include( locate_template('shortcodes/shortcode-breadcrumb.php') ); 
+get_template_part( 'shortcodes/shortcode', 'breadcrumb.php' );
 
 /* ============================================================
 Adding Disqus Comment Count Theme Support
@@ -377,7 +369,7 @@ function marinara_blog_numeric_posts_nav( $query = NULL, $paged = NULL ) {
 		printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
 
 		if ( ! in_array( 2, $links ) )
-			echo '<li>…</li>';
+			echo '<li>...</li>';
 	}
 
 	/**	Link to current page, plus 2 pages in either direction if necessary */
@@ -390,7 +382,7 @@ function marinara_blog_numeric_posts_nav( $query = NULL, $paged = NULL ) {
 	/**	Link to last page, plus ellipses if necessary */
 	if ( ! in_array( $max, $links ) ) {
 		if ( ! in_array( $max - 1, $links ) ) {
-			echo '<li>…</li>' . "\n";			
+			echo '<li>...</li>' . "\n";			
 		}
 
 		$class = $paged == $max ? ' class="active"' : '';

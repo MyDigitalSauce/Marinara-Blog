@@ -25,7 +25,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 					<?php if ($showByAuthor): ?>
 						<span class="author"> by <?php echo $author_avatar; ?>&nbsp;<?php the_author_posts_link(); ?></span>
 					<?php endif; ?>
-					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 				</div>
 	      	</div>
 		  	<div class="col-sm-7 col-xs-12">

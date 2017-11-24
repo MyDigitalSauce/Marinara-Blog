@@ -16,7 +16,7 @@
 				<div class="blog-article-meta-info-wrapper">
 					<a href="<?php the_permalink(); ?>" title="Read More"><?php the_title( '<h3 class="entry-title">', '</h3>' ); ?></a>
 					<p class="article-category"><i class="fa fa-tag"></i> <?php the_category( ', ' ); ?></p>
-					<p class="article-meta-info">posted <i class="fa fa-clock-o"></i> <?php the_time( 'F j Y'); ?> by <?php echo get_avatar( get_the_author_meta('ID'), 24 ); ?> <?php the_author_posts_link(); ?>
+					<p class="article-meta-info">posted <i class="fa fa-clock-o"></i> <?php the_time( get_option( 'date_format' ) ); ?> by <?php echo get_avatar( get_the_author_meta('ID'), 24 ); ?> <?php the_author_posts_link(); ?>
 					</p>
 				</div>
 				<div class="blog-article-thumbnail-wrapper">

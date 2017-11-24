@@ -17,7 +17,7 @@ $total_results = $wp_query->found_posts; ?>
         <div class="no-feat-img-inner-wrapper row">
             <div class="no-feat-img-caption-title">		
             	<h2 class=""><i class="fa fa-search"></i> <?php printf( esc_html__( 'Search Results for: %s', 'marinara_blog' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
-                <h3 class="hidden"><?php echo $total_results; _e(' Results'); ?></h3>
+                <h3 class="hidden"><?php echo $total_results; _e( ' Results', 'marinara_blog' ); ?></h3>
             </div>
        	</div>
     </div>

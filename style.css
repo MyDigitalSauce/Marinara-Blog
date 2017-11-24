@@ -1,14 +1,14 @@
 /*
 Theme Name: Marinara Blog
-Theme URI: https://mydigitalsauce.com/sauces/marinara-blog/
-Author: MyDigitalSauces
+Theme URI: https://mydigitalsauce.com/products/marinara-blog/
+Author: MyDigitalSauce
 Author URI: https://mydigitalsauce.com/
 Description: The Marinara Blog is intended to provide a simple, clean, minimal layout from which you can develop your website. Fully responsive and based on the newest release of the Bootstrap 3 mobile-first, front-end framework, the Marinara Blog wordpress theme will transform effortlessly from desktop-width monitors to tablets and smartphones. Customize the entire site through the native WordPress Customizer. Set colors, features, and elements across the theme. The Simple theme is translation-ready, cross-browser tested, search engine optimized, includes a full-page-width page template, offers infinite color combinations, displays custom featured posts, and is compatible with most popular plugins.
-Version: 1.0.5
+Version: 1.0.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: marinara_blog
-Tags: simple, blog, Marinara Blog, justin estrada, wordpress, responsive, theme, one-column, two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready
+Tags: blog, one-column, two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, theme-options, threaded-comments
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -27,7 +27,6 @@ Shortcodes [marinara_blog_social_shares], [authors], [breadcrumb]
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
 # Normalize in Bootstrap
-# fock_news
 # General
 # Layout
 # Elements
@@ -72,7 +71,7 @@ hr {
     height: 1px;
 }
 /*--------------------------------------------------------------
-# fock_news Specific Normalisization
+# Specific Normalisization
 --------------------------------------------------------------*/
 * {
   font-size: 16px;
@@ -91,12 +90,116 @@ a {
     background: rgba(0, 0, 0, .75);
     position: fixed;
 }
-#wpadminbar .ab-top-menu>li.hover>.ab-item, #wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus, #wpadminbar:not(.mobile) .ab-top-menu>li:hover>.ab-item, #wpadminbar:not(.mobile) .ab-top-menu>li>.ab-item:focus {
+#wpadminbar .ab-top-menu>li.hover>.ab-item,
+#wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus, #wpadminbar:not(.mobile) .ab-top-menu>li:hover>.ab-item,
+#wpadminbar:not(.mobile) .ab-top-menu>li>.ab-item:focus {
     background: #000;
     color: #fff;
 }
 #wpadminbar .quicklinks .ab-sub-wrapper .menupop.hover>a, #wpadminbar .quicklinks .menupop ul li a:focus, #wpadminbar .quicklinks .menupop ul li a:focus strong, #wpadminbar .quicklinks .menupop ul li a:hover, #wpadminbar .quicklinks .menupop ul li a:hover strong, #wpadminbar .quicklinks .menupop.hover ul li a:focus, #wpadminbar .quicklinks .menupop.hover ul li a:hover, #wpadminbar li #adminbarsearch.adminbar-focused:before, #wpadminbar li .ab-item:focus:before, #wpadminbar li a:focus .ab-icon:before, #wpadminbar li.hover .ab-icon:before, #wpadminbar li.hover .ab-item:before, #wpadminbar li:hover #adminbarsearch:before, #wpadminbar li:hover .ab-icon:before, #wpadminbar li:hover .ab-item:before, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:focus, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:hover {
     color: #D8AC31;
+}
+/* ----------------------------------------------------------------
+ * WordPress Core
+ * ---------------------------------------------------------------- */
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.wp-caption,
+.wp-caption-text {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #dadada;
+  padding: 5px;
+}
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+.sticky {
+  position: relative;
+}
+.post:not(.sticky) .icon-thumb-tack {
+  display: none;
+}
+.sticky .icon-thumb-tack {
+  display: block;
+  height: 18px;
+  left: -1.5em;
+  position: absolute;
+  top: 1.65em;
+  width: 20px;
+}
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+        white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000; /* Above WP toolbar. */
 }
 /*--------------------------------------------------------------
 # General
@@ -346,7 +449,7 @@ a {
     padding: 0 30px 0 5px;
     border: 1px solid #DADADA;
     font-size: 10px;
-    color: #000;
+    color: #444;
 }
 .header-search-col #searchform button#searchsubmit {
     position: absolute;
@@ -369,7 +472,7 @@ a {
     width: 100%;
     max-width: 34px;
     margin: 0 auto;
-    background: #000;
+    background: #444;
 }
 .header-row .navbar-toggle .icon-bar+.icon-bar {
     margin-top: 4px;
@@ -483,7 +586,7 @@ header .header-user-options-dropdown .widget .menu {
 header .header-user-options-dropdown .widget .menu li {
     text-align: center;
     margin-bottom: 10px;
-    color: #000;
+    color: #444;
 }
 header .header-user-options-dropdown .widget .menu li:last-child {
     margin-bottom: 0;
@@ -570,8 +673,8 @@ header .header-user-options-dropdown .widget .menu li:last-child {
 }
 .single-post-types-nav-tabs.nav-tabs > li > a {
     font-weight: bold;
-  color: #000;
-  border: none;
+    color: #444;
+    border: none;
     border-bottom: 3px solid transparent;
 }
 .single-post-types-nav-tabs.nav-tabs > li > a:focus,
@@ -657,6 +760,20 @@ header .header-user-options-dropdown .widget .menu li:last-child {
 }
 .author-meta-info-tab-content-nav-tabs {
     border-bottom: 1px solid #004C4F;
+}
+.author-listing-wrapper {
+  margin-top: 15px;
+}
+.author-row {
+    margin-bottom: 15px;
+}
+.author-avatar-col img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.author-row .author-name {
+  margin-top: 0px;
 }
 .gallery { margin: 0 auto 18px; }
 .gallery .gallery-item {
@@ -757,19 +874,6 @@ hr.footer-line-break {
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-.fock_news-font-shadow-black {
-    /* text-shadow: 1px 1px #ffffff, 2px 2px #B7DDDE, 3px 3px #53ABAF, 4px 4px #126F73, 5px 5px #004C4F;*/
-    text-shadow: 2px 2px #000;
-    transition: 500ms;
-}
-.black-font-shadow {
-    text-shadow: 2px 2px #000;
-}
-.transparent-no-border-button {
-    background: transparent;
-    border: none;
-}
-
 /* general elements */
 .feat-img {
     display: block;
@@ -781,7 +885,7 @@ hr.footer-line-break {
 .feat-img-caption-description,
 .feat-img-caption-description p {
   margin-top: 15px;
-  color: #000;
+  color: #444;
 }
 .feat-img-caption-title {
     padding: 10px 0;
@@ -807,18 +911,14 @@ hr.footer-line-break {
     border-right: 1px solid #004C4F;
     border-bottom: 1px solid #004C4F;
 }
-.panel-default>.panel-heading.black-bg {
-    background: #000;
-    border-color: #000;
-}
-h2.panel-title {
+.panel-title {
     font-size: 30px;
 }
 .panel-title>a.white-clr {
     color: #fff;
 }
 .modal-title {
-    text-shadow: 1px 1px #000;
+    text-shadow: 1px 1px #444;
 }
 #breadcrumbs {
     padding: 0;
@@ -998,14 +1098,14 @@ h2.panel-title {
     padding: 0 30px 0 5px;
     border: 1px solid #DADADA;
     font-size: 16px;
-    color: #000;  
+    color: #444;  
 }
 #searchform button#searchsubmit {
     position: absolute;
     top: 0;
     right: 5px;
     background: transparent;
-    color: #000;
+    color: #444;
     border: none; 
 }
 /* elements > comments form */
@@ -1100,6 +1200,8 @@ h2.panel-title {
     background: #f50;
     color: #fff;
 }
+.commentlist .bypostauthor { border-top: 10px solid #c7c7c7; }
+.commentlist li ul.children li.bypostauthor { border-top: 10px solid #c7c7c7; }
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -1273,7 +1375,7 @@ form input[type="submit"] {
 # Colors
 --------------------------------------------------------------*/
 p {
-  color: #050503;
+  color: #444;
 }
 .black-clr,
 .black-clr:hover {
@@ -1291,16 +1393,13 @@ p {
   background: #fff;
 }
 .black-bg {
-  background: #050503;
+  background: #000;
 }
 .orange-bg {
   background: #f50;
 }
 .grey-bg {
     background: #DADADA;
-}
-.purple-bg {
-  background: #5d2884;
 }
 .social-shares {
     padding: 0;

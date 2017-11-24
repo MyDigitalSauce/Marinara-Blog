@@ -27,7 +27,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 					<?php if ($showByAuthor): ?>
 						<span class="author"> by <?php echo $author_avatar; ?>&nbsp;<?php the_author_posts_link(); ?></span>
 					<?php endif; ?>
-					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+					<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 				</div>
 		    	<div class="article-content-col col-xs-12">
 		    		<div class="article-content"><?php the_content(); ?></div>
@@ -70,14 +70,14 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 						  </a>
 						</div><!-- end of <div id="article-gallery-carousel -->
 		    		<?php } else { ?>
-		    			<p><?php _e('No Gallery Images Are Set, Go to the Post Editor and Input a Gallery Shortcode into the WordPress Content Area.'); ?></p>
+		    			<p><?php _e('No Gallery Images Are Set, Go to the Post Editor and Input a Gallery Shortcode into the WordPress Content Area.', 'marinara_blog'); ?></p>
 	    			<?php } ?>
 					<div class="article-desc">
 						In <span class="category"><i class="fa fa-tag"></i>&nbsp;<?php the_category( ', ' ); ?></span>
 						<?php if ($showByAuthor): ?>
 							<span class="author"> by <?php echo $author_avatar; ?>&nbsp;<?php the_author_posts_link(); ?></span>
 						<?php endif; ?>
-						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 					</div>
 		      	</div>
 			  	<div class="col-sm-7 col-xs-12">
@@ -85,7 +85,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 					<div class="article-excerpt"><?php echo get_the_excerpt(); ?></div>
 					<div class="article-read-more"><a href="<?php the_permalink(); ?>" title="Read More..."><?php echo $post->comment_count?>&nbsp;<?php echo ($post->comment_count==1?'<i class="fa fa-comment"></i>':'<i class="fa fa-comments"></i>');?>&nbsp;Read More</a></div>
 				</div>
-			<?php } else if (isset($post_format) && $post_format == "video") {
+			<?php } else if ( isset( $post_format ) && $post_format == "video" ) {
 				$media = get_media_embedded_in_content( 
 				    apply_filters( 'the_content', get_the_content() )
 				); ?>
@@ -93,7 +93,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 		    		<?php if(! empty($media)): ?>
 						<?php echo $media[0]; ?>
 					<?php else: ?>
-						<p><?php _e('No Video is Embeded, Go to the Post Editor and Input a Video into the WordPress Content Area.'); ?></p>
+						<p><?php _e('No Video is Embeded, Go to the Post Editor and Input a Video into the WordPress Content Area.', 'marinara_blog'); ?></p>
 					<?php endif; ?>
 				</div>
 		    	<div class="col-sm-5 col-xs-12 article-desc-col">
@@ -102,7 +102,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 						<?php if ($showByAuthor): ?>
 							<span class="author"> by <?php echo $author_avatar; ?>&nbsp;<?php the_author_posts_link(); ?></span>
 						<?php endif; ?>
-						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 					</div>
 		      	</div>
 			  	<div class="col-sm-7 col-xs-12">
@@ -125,7 +125,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 						<?php if ($showByAuthor): ?>
 							<span class="author"> by <?php echo $author_avatar; ?>&nbsp;<?php the_author_posts_link(); ?></span>
 						<?php endif; ?>
-						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( 'F j Y'); ?>
+						<span class="publish-date"> published on <i class="fa fa-calendar"></i> <?php the_time( get_option( 'date_format' ) ); ?>
 					</div>
 		      	</div>
 			  	<div class="col-sm-7 col-xs-12">
