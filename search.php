@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 get_header();
 /* Usable Variables */
@@ -16,8 +16,8 @@ $total_results = $wp_query->found_posts; ?>
     <div id="inside-page-no-featured-img-wrapper" class="container">
         <div class="no-feat-img-inner-wrapper row">
             <div class="no-feat-img-caption-title">		
-            	<h2 class=""><i class="fa fa-search"></i> <?php printf( esc_html__( 'Search Results for: %s', 'marinara_blog' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
-                <h3 class="hidden"><?php echo $total_results; _e( ' Results', 'marinara_blog' ); ?></h3>
+            	<h2 class=""><i class="fa fa-search"></i> <?php printf( esc_html__( 'Search Results for: %s', 'marinara-blog' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
+                <h3 class="hidden"><?php echo $total_results; _e( ' Results', 'marinara-blog' ); ?></h3>
             </div>
        	</div>
     </div>

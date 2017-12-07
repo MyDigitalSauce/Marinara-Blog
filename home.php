@@ -6,7 +6,7 @@
  *
  * No Sidebar Blog
  * 
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 get_header(); ?>
 <div id="inside-page-content-wrapper" class="blog-page-content-wrapper-row content-wrapper-row row">

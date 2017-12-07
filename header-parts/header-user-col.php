@@ -1,6 +1,6 @@
 <?php
 /**
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 /* Set Current User Variables 
 =========================================== */

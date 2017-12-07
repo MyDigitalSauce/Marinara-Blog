@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 get_header();
 $author = get_user_by( 'slug', get_query_var( 'author_name' ) ); ?>
@@ -19,8 +19,8 @@ $author = get_user_by( 'slug', get_query_var( 'author_name' ) ); ?>
 	<div class="inside-page-container author-page-container container">
 		<div class="single-post-types-tab-col col-xs-12 col-sm-8">
 			<ul class="single-post-types-nav-tabs nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab"><?php _e( 'About', 'marinara_blog' ); ?></a></li>
-				<li role="presentation"><a href="#blog" aria-controls="blog" role="tab" data-toggle="tab"><?php _e( 'Blog', 'marinara_blog' ); ?></a></li>
+				<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab"><?php _e( 'About', 'marinara-blog' ); ?></a></li>
+				<li role="presentation"><a href="#blog" aria-controls="blog" role="tab" data-toggle="tab"><?php _e( 'Blog', 'marinara-blog' ); ?></a></li>
 			</ul>
 			<div class="single-post-types-tab-content tab-content">
 				<div role="tabpanel" class="tab-pane active" id="about">

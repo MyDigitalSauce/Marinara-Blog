@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 
 /* Working Protocal Variable */
@@ -43,9 +43,9 @@ function marinara_blog_setup() {
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
 	 * If you're building a theme based on marinara_blog, use a find and replace
-	 * to change 'marinara_blog' to the name of your theme in all the template files.
+	 * to change 'marinara-blog' to the name of your theme in all the template files.
 	 */
-	load_theme_textdomain( 'marinara_blog', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'marinara-blog', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -80,8 +80,8 @@ function marinara_blog_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'header-menu' => esc_html__( 'Header Menu', 'marinara_blog' ),
-		'footer-menu' => esc_html__( 'Footer Menu', 'marinara_blog' )
+		'header-menu' => esc_html__( 'Header Menu', 'marinara-blog' ),
+		'footer-menu' => esc_html__( 'Footer Menu', 'marinara-blog' )
 	) );
 
 	/*
@@ -136,10 +136,10 @@ add_action( 'after_setup_theme', 'marinara_blog_content_width', 0 );
  */
 function marinara_blog_register_sidebar( $name, $id, $description) {
 	register_sidebar( array(
-		// 'name'          => esc_html__( $name, 'marinara_blog' ),
+		// 'name'          => esc_html__( $name, 'marinara-blog' ),
 		'name'			=> $name,
 		'id'            => $id,
-		// 'description'   => esc_html__( $description, 'marinara_blog'),
+		// 'description'   => esc_html__( $description, 'marinara-blog'),
 		'description'	=> $description,
 		'before_widget' => '<div class="panel-group widget-group %2$s" id="accordion%1$s" role="tablist" aria-multiselectable="true"><div class="panel panel-default">',
 		'after_widget'  => '</div></div></div></div>',
@@ -187,7 +187,7 @@ function marinara_blog_scripts() {
 
 	wp_enqueue_style('marinara_blog-style', get_stylesheet_uri(),
     	array('bootstrap-css','marinara_blog-font-awesome', 'marinara_blog-google-fonts', 'local-fonts'),
-    	'1.0.5'
+    	'1.0.6'
     	);
 
 	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.5', true);
@@ -268,15 +268,10 @@ function marinara_blog_google_analytics() {
 }
 add_action('wp_footer', 'marinara_blog_google_analytics');
 
-/* Creates shortcode [marinara_blog_social_shares] */
+// theme func marinara_blog_social_shares_func() 
 function marinara_blog_social_shares_func(){
-	/**
-	 *
-	 * @package marinara_blog
-	 */
-	get_template_part( 'shortcodes/shortcode', 'social-shares' );
+	get_template_part( 'shortcodes/func', 'social-shares' );
 }
-add_shortcode('marinara_blog_social_shares', 'marinara_blog_social_shares_func');
 
 /* Creates shortcode [authors orderby=""] */
 function marinara_blog_authors_func( $atts ){
@@ -289,15 +284,14 @@ function marinara_blog_authors_func( $atts ){
     $orderBy = $a['orderby'];
 	/**
 	 *
-	 * @package marinara_blog
+	 * @package Marinara_Blog
 	 */
 	// include( locate_template('shortcodes/shortcode-authors.php') );
-	get_template_part( 'shortcodes/shortcode', 'authors.php' );
+	get_template_part( 'shortcodes/func', 'authors.php' );
 	$output_string = ob_get_contents();
 	ob_end_clean();
 	return $output_string; ?>
 <?php }
-add_shortcode('authors', 'marinara_blog_authors_func');
 
 /*BreadCrumb ShortCode
 * Creates [breadcrumb]
@@ -435,7 +429,7 @@ if (!function_exists('marinara_blog_more_post_ajax')) {
 				}
 				$category_out = implode(', ', $category_out);
  
-				$cat_out = (!empty($categories)) ? '<span class="cat-links"><span class="screen-reader-text">'.esc_html__('Categories', 'marinara_blog').'</span>'.$category_out.'</span>' : '';
+				$cat_out = (!empty($categories)) ? '<span class="cat-links"><span class="screen-reader-text">'.esc_html__('Categories', 'marinara-blog').'</span>'.$category_out.'</span>' : '';
  
 				$out .= '<div class="article article-count article-wrapper clearfix">
 							<div class="col-sm-5 col-xs-12 article-img-col">

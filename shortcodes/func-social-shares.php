@@ -1,10 +1,8 @@
 <?php
 /**
- * @version beta
- *
- * marinara_blog Shortcode Social Boxes. [marinara_blog_social_shares]
- *
- * @package marinara_blog
+ * marinara-blog
+ * theme func marinara_blog_social_shares_func()
+ * @package Marinara_Blog
  */
 ?>
 <?php

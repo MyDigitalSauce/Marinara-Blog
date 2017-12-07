@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 $enableUserCol = get_theme_mod('enable_user_col'); ?>
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ $enableUserCol = get_theme_mod('enable_user_col'); ?>
 			  			padding-0">
 				<?php
 			    /**
-			     * @package marinara_blog
+			     * @package Marinara_Blog
 			     */
 				get_template_part('header-parts/header', 'search-form'); ?>
 			</div>
@@ -56,7 +56,7 @@ $enableUserCol = get_theme_mod('enable_user_col'); ?>
 							padding-0">
 					<?php
 				    /**
-				     * @package marinara_blog
+				     * @package Marinara_Blog
 				     */
 					get_template_part('header-parts/header', 'user-col'); ?>
 				</div>
@@ -77,7 +77,7 @@ $enableUserCol = get_theme_mod('enable_user_col'); ?>
 	    /**
 	     * Include header-parts/header-right-dropdown-menu.php
 	     * Includes the header right dropdown menu that is shown on dropdown-menu-toggle
-	     * @package marinara_blog
+	     * @package Marinara_Blog
 	     */
 		get_template_part( 'header-parts/header', 'right-dropdown-menu' );
 	    ?>

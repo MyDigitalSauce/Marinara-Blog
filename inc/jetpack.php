@@ -4,7 +4,7 @@
  *
  * @link https://jetpack.me/
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 
 /**

@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 ?>
 <div class="blog-listing-wrapper wrapper">

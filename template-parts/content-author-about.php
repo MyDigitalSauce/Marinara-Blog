@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 $author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 /* Establish Working Varaibles */

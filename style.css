@@ -7,7 +7,7 @@ Description: The Marinara Blog is intended to provide a simple, clean, minimal l
 Version: 1.0.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: marinara_blog
+Text Domain: marinara-blog
 Tags: blog, one-column, two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, theme-options, threaded-comments
 
 This theme, like WordPress, is licensed under the GPL.
@@ -21,7 +21,7 @@ Bootstrap CSS & JS included
 Font Awesome
 Google Font Roboto
 jQuery
-Shortcodes [marinara_blog_social_shares], [authors], [breadcrumb]
+Special Theme Functions marinara_blog_social_shares(), marinara_blog_authors(), marinara_blog_breadcrumb()
 */
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
@@ -82,22 +82,6 @@ a {
  a:focus, a:hover {
   text-decoration: none;
   color: #000;
-}
-/* ----------------------------------------------------------------
- * WordPress Front End
- * ---------------------------------------------------------------- */
-#wpadminbar {
-    background: rgba(0, 0, 0, .75);
-    position: fixed;
-}
-#wpadminbar .ab-top-menu>li.hover>.ab-item,
-#wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus, #wpadminbar:not(.mobile) .ab-top-menu>li:hover>.ab-item,
-#wpadminbar:not(.mobile) .ab-top-menu>li>.ab-item:focus {
-    background: #000;
-    color: #fff;
-}
-#wpadminbar .quicklinks .ab-sub-wrapper .menupop.hover>a, #wpadminbar .quicklinks .menupop ul li a:focus, #wpadminbar .quicklinks .menupop ul li a:focus strong, #wpadminbar .quicklinks .menupop ul li a:hover, #wpadminbar .quicklinks .menupop ul li a:hover strong, #wpadminbar .quicklinks .menupop.hover ul li a:focus, #wpadminbar .quicklinks .menupop.hover ul li a:hover, #wpadminbar li #adminbarsearch.adminbar-focused:before, #wpadminbar li .ab-item:focus:before, #wpadminbar li a:focus .ab-icon:before, #wpadminbar li.hover .ab-icon:before, #wpadminbar li.hover .ab-item:before, #wpadminbar li:hover #adminbarsearch:before, #wpadminbar li:hover .ab-icon:before, #wpadminbar li:hover .ab-item:before, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:focus, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:hover {
-    color: #D8AC31;
 }
 /* ----------------------------------------------------------------
  * WordPress Core

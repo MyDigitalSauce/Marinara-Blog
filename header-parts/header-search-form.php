@@ -4,7 +4,7 @@
  *
  * @link http://codex.wordpress.org/Function_Reference/get_search_form
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 ?>
 <form id="searchform" class="" role="search" method="get" action="<?php echo home_url( '/' ); ?>">

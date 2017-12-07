@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 $phoneNum = get_theme_mod( 'marinara_blog_phone_num');
 $email = get_theme_mod('marinara_blog_email');

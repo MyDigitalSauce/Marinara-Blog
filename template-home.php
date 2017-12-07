@@ -4,13 +4,13 @@
  *
  * This is a custom template for the home page.
  * @link https://codex.wordpress.org/Template_Hierarchy
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 get_header();
 $featImgURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
 $the_excerpt = get_the_excerpt();
 if ( $the_excerpt == '' ) {
-	$the_excerpt = get_option('marinara_blog_input_site_description');
+	$the_excerpt = get_option('marinara-blog_input_site_description');
 }
 $enableAuthorTab = get_theme_mod('enable_author_tab'); ?>
 <div id="inside-page-content-wrapper" class="home-page-content-wrapper-row content-wrapper-row row">
@@ -45,8 +45,8 @@ $enableAuthorTab = get_theme_mod('enable_author_tab'); ?>
 
 			<?php if ($enableAuthorTab) { ?>
 				<ul class="single-post-types-nav-tabs nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#blog" aria-controls="blog" role="tab" data-toggle="tab"><?php _e( 'Blog', 'marinara_blog' ); ?></a></li>
-					<li role="presentation"><a href="#authors" aria-controls="authors" role="tab" data-toggle="tab"><?php _e( 'Authors', 'marinara_blog' ); ?></a></li>
+					<li role="presentation" class="active"><a href="#blog" aria-controls="blog" role="tab" data-toggle="tab"><?php _e( 'Blog', 'marinara-blog' ); ?></a></li>
+					<li role="presentation"><a href="#authors" aria-controls="authors" role="tab" data-toggle="tab"><?php _e( 'Authors', 'marinara-blog' ); ?></a></li>
 				</ul>
 				<div class="single-post-types-tab-content tab-content">
 					<div role="tabpanel" class="tab-pane active" id="blog">
@@ -57,7 +57,7 @@ $enableAuthorTab = get_theme_mod('enable_author_tab'); ?>
 			<?php if ($enableAuthorTab) { ?>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="authors">
-						<?php echo do_shortcode('[authors]'); ?>
+						<?php echo marinara_blog_authors_func(); ?>
 					</div>
 				</div>
 			<?php } ?>

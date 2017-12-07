@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 
@@ -70,7 +70,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 						  </a>
 						</div><!-- end of <div id="article-gallery-carousel -->
 		    		<?php } else { ?>
-		    			<p><?php _e('No Gallery Images Are Set, Go to the Post Editor and Input a Gallery Shortcode into the WordPress Content Area.', 'marinara_blog'); ?></p>
+		    			<p><?php _e('No Gallery Images Are Set, Go to the Post Editor and Input a Gallery Shortcode into the WordPress Content Area.', 'marinara-blog'); ?></p>
 	    			<?php } ?>
 					<div class="article-desc">
 						In <span class="category"><i class="fa fa-tag"></i>&nbsp;<?php the_category( ', ' ); ?></span>
@@ -93,7 +93,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 		    		<?php if(! empty($media)): ?>
 						<?php echo $media[0]; ?>
 					<?php else: ?>
-						<p><?php _e('No Video is Embeded, Go to the Post Editor and Input a Video into the WordPress Content Area.', 'marinara_blog'); ?></p>
+						<p><?php _e('No Video is Embeded, Go to the Post Editor and Input a Video into the WordPress Content Area.', 'marinara-blog'); ?></p>
 					<?php endif; ?>
 				</div>
 		    	<div class="col-sm-5 col-xs-12 article-desc-col">

@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 

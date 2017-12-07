@@ -6,7 +6,7 @@
  *
  * Contains the closing of the header off canvas menu widgets 1, 2 & 3.
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  *
  * @author jestrada@causeforce.com
  */

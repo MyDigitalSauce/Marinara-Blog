@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 ?>
   <!-- Footer Modal To Be Used Dynamically -->

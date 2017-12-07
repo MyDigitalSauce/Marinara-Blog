@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -64,7 +64,7 @@
 				<p><i class="fa fa-tag"></i> <?php /* display single tags */ the_tags( 'Tags: ', ', ', '' ); ?></p>
 			<?php endif;
 				wp_link_pages( array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'marinara_blog' ),
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'marinara-blog' ),
 					'after'  => '</div>',
 				) );
 			?>

@@ -4,7 +4,7 @@
  *
  * marinara_blog blog reel [authors orderby=""] shortcode.
  *
- * @package marinara_blog
+ * @package Marinara_Blog
  */
 ?>
 <div class="author-listing-wrapper clearfix">
