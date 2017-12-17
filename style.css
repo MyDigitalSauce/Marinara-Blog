@@ -4,7 +4,7 @@ Theme URI: https://mydigitalsauce.com/products/marinara-blog/
 Author: MyDigitalSauce
 Author URI: https://mydigitalsauce.com/
 Description: The Marinara Blog is intended to provide a simple, clean, minimal layout from which you can develop your website. Fully responsive and based on the newest release of the Bootstrap 3 mobile-first, front-end framework, the Marinara Blog wordpress theme will transform effortlessly from desktop-width monitors to tablets and smartphones. Customize the entire site through the native WordPress Customizer. Set colors, features, and elements across the theme. The Simple theme is translation-ready, cross-browser tested, search engine optimized, includes a full-page-width page template, offers infinite color combinations, displays custom featured posts, and is compatible with most popular plugins.
-Version: 1.0.6
+Version: 1.0.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: marinara-blog
@@ -20,8 +20,6 @@ Normalizing styles have been added via Bootstrap Framework
 Bootstrap CSS & JS included
 Font Awesome
 Google Font Roboto
-jQuery
-Special Theme Functions marinara_blog_social_shares(), marinara_blog_authors(), marinara_blog_breadcrumb()
 */
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:

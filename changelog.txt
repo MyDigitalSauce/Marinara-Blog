@@ -1,5 +1,8 @@
 Marinara Blog WP Theme Change Log
 
+v 1.0.7
+- Theme check plugin .org updates
+
 v 1.0.6
 - Made theme ready for .org
 

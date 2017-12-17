@@ -179,9 +179,9 @@ function marinara_blog_scripts() {
 
 	wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0.5');
 
-	wp_enqueue_style('marinara_blog-font-awesome', get_template_directory_uri() . 'font-awesome.min.css', array(), '1.0.5');
+	wp_enqueue_style('marinara_blog-font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '1.0.5');
 
-	wp_enqueue_style('marinara_blog-google-fonts', get_template_directory_uri() . 'google-fonts.css', array(), '1.0.5');
+	wp_enqueue_style('marinara_blog-google-fonts', get_template_directory_uri() . '/css/google-fonts.css', array(), '1.0.5');
 
 	wp_enqueue_style('local-fonts', get_template_directory_uri(). '/css/fonts.css');
 
@@ -268,37 +268,296 @@ function marinara_blog_google_analytics() {
 }
 add_action('wp_footer', 'marinara_blog_google_analytics');
 
-// theme func marinara_blog_social_shares_func() 
-function marinara_blog_social_shares_func(){
-	get_template_part( 'shortcodes/func', 'social-shares' );
+// theme func marinara_blog_social_shares() 
+function marinara_blog_social_shares_buttons(){
+	$post = get_post();
+
+	// Get Twitter Handle
+	$twitterHandle = str_replace('https://twitter.com/', '', get_theme_mod('marinara_blog_twitter'));
+
+	// Get current page URL 
+	$urlToShare = get_permalink();
+
+	// Get current page title
+	$titleToShare = str_replace( ' ', '%20', $post->post_title);
+
+	// Get Post Thumbnail for pinterest
+	$thumbnailToShare = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+
+	// Get Bloginfo Name
+	$siteTitle = str_replace( ' ', '%20', get_bloginfo('name'));
+
+	// Social Share URL
+	$facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$urlToShare;
+	if ($twitterHandle){  
+	  $twitterURL = 'https://twitter.com/intent/tweet?text='.$titleToShare.'&amp;url='.$urlToShare.'&amp;via='.$twitterHandle;
+	} else {
+	  $twitterURL = 'https://twitter.com/intent/tweet?text='.$titleToShare.'&amp;url='.$urlToShare.'&amp;via='.$siteTitle;
+	}
+	$googleURL = 'https://plus.google.com/share?url='.$urlToShare;
+	$pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$urlToShare.'&amp;media='.$thumbnailToShare[0].'&amp;description='.$titleToShare;
+	$output_string = '<ul id="oneday-social-shares" class="social-shares clearfix">
+	  <li class="facebook-share col-xs-3">
+	    <a href="<?php echo $facebookURL; ?>"  type="button" data-toggle="tooltip" data-placement="top" title="Share On Facebook" target="_blank">
+	      <i class="fa fa-facebook"></i>
+	    </a>
+	  </li>
+	  <li class="twitter-share col-xs-3">
+	    <a href="<?php echo $twitterURL; ?>" type="button" data-toggle="tooltip" data-placement="top" title="Share On Twitter" rel="nofollow" target="_blank">
+	      <i class="fa fa-twitter"></i>
+	    </a>
+	  </li>
+	  <li class="pinterest-share col-xs-3">
+	    <a href="<?php echo $pinterestURL; ?>" type="button" data-toggle="tooltip" data-placement="top" title="Share On Pinterest" target="_blank">
+	      <i class="fa fa-pinterest"></i>
+	    </a>
+	  </li>
+	  <li class="google-share col-xs-3">
+	    <a href="<?php echo $googleURL; ?>" type="button" data-toggle="tooltip" data-placement="top" title="Share On Google Plus" target="_blank">
+	      <i class="fa fa-google"></i>
+	    </a>
+	  </li>
+	</ul>';
+	echo $output_string;
 }
 
-/* Creates shortcode [authors orderby=""] */
-function marinara_blog_authors_func( $atts ){
-	ob_start();
-	/* orderby - Sort by 'ID', 'login', 'nicename', 'email', 'url', 'registered', 'display_name', 'post_count', 'include', or 'meta_value' (query must also contain a 'meta_key' - see WP_User_Query). */
-    $orderBy = 'nicename'; /* default val */
-    $a = shortcode_atts( array(
-        'orderby' => $orderBy,
-    ), $atts );
-    $orderBy = $a['orderby'];
-	/**
-	 *
-	 * @package Marinara_Blog
-	 */
-	// include( locate_template('shortcodes/shortcode-authors.php') );
-	get_template_part( 'shortcodes/func', 'authors.php' );
+function marinara_blog_authors_func(  ){
+	ob_start(); ?>
+	<div class="author-listing-wrapper clearfix">
+	<?php
+	$args = array(
+		'blog_id'      => $GLOBALS['blog_id'],
+		'role'         => '',
+		'role__in'     => array(),
+		'role__not_in' => array(),
+		'meta_key'     => '',
+		'meta_value'   => '',
+		'meta_compare' => '',
+		'meta_query'   => array(),
+		'date_query'   => array(),        
+		'include'      => array(),
+		'exclude'      => array(),
+		'orderby'      => 'login',
+		'order'        => 'ASC',
+		'offset'       => '',
+		'search'       => '',
+		'number'       => '',
+		'count_total'  => false,
+		'fields'       => 'all',
+		'who'          => '',
+	 ); 
+	$authors = get_users( $args );
+
+	foreach( $authors as $author ){
+		
+		$author_avatar_url = esc_attr( get_the_author_meta( 'profile_img', $author->ID ) );
+		if ( $author_avatar_url == '') {
+			$author_avatar = get_avatar($author->ID,200);
+		}
+		$author_posted_articles_cnt = count_user_posts( $author->ID , 'post' );
+		$author_email = esc_html($author->user_email);
+		$author_name = $author->display_name;
+		$author_url = get_site_url().'/blog/author/'.$author->user_nicename;
+		?>
+		<div class="col-xs-12 col-md-6">
+			<div class="author-row author-row-<?php echo $author->ID; ?> row">
+				<a href="<?php echo $author_url; ?>" title="<?php echo $author_name; ?>" class="author-avatar-col col-xs-4" style="padding-right: 0;">
+					<?php if ($author_avatar_url != ''): ?>
+						<img src="<?php echo $author_avatar_url; ?>" class="avatar" alt="<?php echo $author_name; ?> Avatar"/>
+					<?php else: ?>
+						<?php echo $author_avatar; ?>
+					<?php endif; ?>
+				</a>
+				<div class="col-xs-8">
+					<h4 class="author-name"><a href="<?php echo $author_url; ?>" title="<?php echo $author_name; ?>"><?php echo $author_name; ?></a></h4>
+					<p class="author-website-count"><i class="fa fa-pencil"></i>&nbsp;<?php echo $author_posted_articles_cnt; ?>&nbsp;<?php echo ($author_posted_articles_cnt==1?'Article':'Articles');?> Written</p>
+				</div>
+			</div>
+		</div>
+	<?php }
+	if( empty( $authors ) ) { ?>
+		<div class="no-authors-col col-xs-12"><h4>There are no users with the role: Author</h4></div>
+	<?php } ?>
+	</div><!-- end of <div class="author-listing-wrapper"> -->
+	<?php
 	$output_string = ob_get_contents();
 	ob_end_clean();
 	return $output_string; ?>
-<?php }
+<?php
+}
 
-/*BreadCrumb ShortCode
-* Creates [breadcrumb]
-======================================== */
 /* BreadCrumb Function
 ======================================== */
-get_template_part( 'shortcodes/shortcode', 'breadcrumb.php' );
+function marinara_blog_breadcrumb() {
+    // Settings
+    $separator          = '&raquo;';
+    $breadcrums_id      = 'breadcrumbs';
+    $breadcrums_class   = 'breadcrumbs';
+    $home_title         = 'Home';
+    // If you have any custom post types with custom taxonomies, put the taxonomy name below (e.g. product_cat)
+    $custom_taxonomy    = 'product_cat';
+    // Get the query & post information
+    global $post,$wp_query;
+       
+    // Do not display on the homepage
+    if ( !is_front_page() ) {
+        // Build the breadcrums
+        echo '<ul id="'.$breadcrums_id.'" class="'. $breadcrums_class.'">';
+        // Home page
+        echo '<li class="item-home"><a class="bread-link bread-home" href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
+        echo '<li class="separator separator-home"> ' . $separator . ' </li>';
+        if ( is_archive() && !is_tax() && !is_category() && !is_tag() ) {              
+            echo '<li class="item-current item-archive"><strong class="bread-current bread-archive">' . post_type_archive_title($prefix, false) . '</strong></li>';
+        } else if ( is_archive() && is_tax() && !is_category() && !is_tag() ) {           
+            // If post is a custom post type
+            $post_type = get_post_type();
+            // If it is a custom post type display name and link
+            if($post_type != 'post') {
+                $post_type_object = get_post_type_object($post_type);
+                $post_type_archive = get_post_type_archive_link($post_type);
+              
+                echo '<li class="item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . $post_type_object->labels->name . '</a></li>';
+                echo '<li class="separator"> ' . $separator . ' </li>';              
+            }
+            $custom_tax_name = get_queried_object()->name;
+            echo '<li class="item-current item-archive"><strong class="bread-current bread-archive">' . $custom_tax_name . '</strong></li>'; 
+        } else if ( is_single() ) {
+            // If post is a custom post type
+            $post_type = get_post_type();
+            // If it is a custom post type display name and link
+            if($post_type != 'post') {
+                $post_type_object = get_post_type_object($post_type);
+                $post_type_archive = get_post_type_archive_link($post_type);
+              
+                echo '<li class="item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . $post_type_object->labels->name . '</a></li>';
+                echo '<li class="separator"> ' . $separator . ' </li>';
+            }
+            // Get post category info
+            $category = get_the_category();
+            if(!empty($category)) {
+                // Get last category post is in
+                $last_category = end(array_values($category));
+                // Get parent any categories and create array
+                $get_cat_parents = rtrim(get_category_parents($last_category->term_id, true, ','),',');
+                $cat_parents = explode(',',$get_cat_parents);
+                // Loop through parent categories and store in variable $cat_display
+                $cat_display = '';
+                foreach($cat_parents as $parents) {
+                    $cat_display .= '<li class="item-cat">'.$parents.'</li>';
+                    $cat_display .= '<li class="separator"> ' . $separator . ' </li>';
+                }
+            }
+            // If it's a custom post type within a custom taxonomy
+            $taxonomy_exists = taxonomy_exists($custom_taxonomy);
+            if(empty($last_category) && !empty($custom_taxonomy) && $taxonomy_exists) {  
+                $taxonomy_terms = get_the_terms( $post->ID, $custom_taxonomy );
+                $cat_id         = $taxonomy_terms[0]->term_id;
+                $cat_nicename   = $taxonomy_terms[0]->slug;
+                $cat_link       = get_term_link($taxonomy_terms[0]->term_id, $custom_taxonomy);
+                $cat_name       = $taxonomy_terms[0]->name;
+            }
+            // Check if the post is in a category
+            if(!empty($last_category)) {
+                echo $cat_display;
+                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';     
+            // Else if post is in a custom taxonomy
+            } else if(!empty($cat_id)) {
+                echo '<li class="item-cat item-cat-' . $cat_id . ' item-cat-' . $cat_nicename . '"><a class="bread-cat bread-cat-' . $cat_id . ' bread-cat-' . $cat_nicename . '" href="' . $cat_link . '" title="' . $cat_name . '">' . $cat_name . '</a></li>';
+                echo '<li class="separator"> ' . $separator . ' </li>';
+                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
+            } else {
+                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
+            }
+        } else if ( is_category() ) {  
+            // Category page
+            echo '<li class="item-current item-cat"><strong class="bread-current bread-cat">' . single_cat_title('', false) . '</strong></li>';
+        } else if ( is_page() ) {
+               
+            // Standard page
+            if( $post->post_parent ){
+                   
+                // If child page, get parents 
+                $anc = get_post_ancestors( $post->ID );
+                   
+                // Get parents in the right order
+                $anc = array_reverse($anc);
+                   
+                // Parent page loop
+                if ( !isset( $parents ) ) $parents = null;
+                foreach ( $anc as $ancestor ) {
+                    $parents .= '<li class="item-parent item-parent-' . $ancestor . '"><a class="bread-parent bread-parent-' . $ancestor . '" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a></li>';
+                    $parents .= '<li class="separator separator-' . $ancestor . '"> ' . $separator . ' </li>';
+                }
+                   
+                // Display parent pages
+                echo $parents;
+                   
+                // Current page
+                echo '<li class="item-current item-' . $post->ID . '"><strong title="' . get_the_title() . '"> ' . get_the_title() . '</strong></li>';
+                   
+            } else {
+                   
+                // Just display current page if not parents
+                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_the_title() . '</strong></li>';
+                   
+            }
+               
+        } else if ( is_tag() ) {
+               
+            // Tag page
+               
+            // Get tag information
+            $term_id        = get_query_var('tag_id');
+            $taxonomy       = 'post_tag';
+            $args           = 'include=' . $term_id;
+            $terms          = get_terms( $taxonomy, $args );
+            $get_term_id    = $terms[0]->term_id;
+            $get_term_slug  = $terms[0]->slug;
+            $get_term_name  = $terms[0]->name;
+            // Display the tag name
+            echo '<li class="item-current item-tag-' . $get_term_id . ' item-tag-' . $get_term_slug . '"><strong class="bread-current bread-tag-' . $get_term_id . ' bread-tag-' . $get_term_slug . '">' . $get_term_name . '</strong></li>';
+        } elseif ( is_day() ) {
+            // Day archive
+            // Year link
+            echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
+            echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
+               
+            // Month link
+            echo '<li class="item-month item-month-' . get_the_time('m') . '"><a class="bread-month bread-month-' . get_the_time('m') . '" href="' . get_month_link( get_the_time('Y'), get_the_time('m') ) . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</a></li>';
+            echo '<li class="separator separator-' . get_the_time('m') . '"> ' . $separator . ' </li>';
+            // Day display
+            echo '<li class="item-current item-' . get_the_time('j') . '"><strong class="bread-current bread-' . get_the_time('j') . '"> ' . get_the_time('jS') . ' ' . get_the_time('M') . ' Archives</strong></li>';
+        } else if ( is_month() ) {
+            // Month Archive
+            // Year link
+            echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
+            echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
+            // Month display
+            echo '<li class="item-month item-month-' . get_the_time('m') . '"><strong class="bread-month bread-month-' . get_the_time('m') . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</strong></li>';
+        } else if ( is_year() ) {
+            // Display year archive
+            echo '<li class="item-current item-current-' . get_the_time('Y') . '"><strong class="bread-current bread-current-' . get_the_time('Y') . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</strong></li>';
+               
+        } else if ( is_author() ) {
+            // Auhor archive
+            // Get the author information
+            global $author;
+            $userdata = get_userdata( $author );
+            // Display author name
+            echo '<li class="item-current item-current-' . $userdata->user_nicename . '"><strong class="bread-current bread-current-' . $userdata->user_nicename . '" title="' . $userdata->display_name . '">' . 'Author: ' . $userdata->display_name . '</strong></li>';
+        } else if ( get_query_var('paged') ) {
+            // Paginated archives
+            echo '<li class="item-current item-current-' . get_query_var('paged') . '"><strong class="bread-current bread-current-' . get_query_var('paged') . '" title="Page ' . get_query_var('paged') . '">'.__('Page', 'marinara-blog') . ' ' . get_query_var('paged') . '</strong></li>';
+        } else if ( is_search() ) {
+            // Search results page
+            echo '<li class="item-current item-current-' . get_search_query() . '"><strong class="bread-current bread-current-' . get_search_query() . '" title="Search results for: ' . get_search_query() . '">Search results for: ' . get_search_query() . '</strong></li>';
+        } elseif ( is_404() ) {      
+            // 404 page
+            echo '<li>' . 'Error 404' . '</li>';
+        }
+        echo '</ul>';
+    } 
+}
 
 /* ============================================================
 Adding Disqus Comment Count Theme Support
@@ -391,126 +650,6 @@ function marinara_blog_numeric_posts_nav( $query = NULL, $paged = NULL ) {
 	echo '</ul></div>' . "\n";
 
 }
-
-/* ============================================================
-Ajax Load More
- ============================================================ */
-$ajaxurl = admin_url( 'admin-ajax.php');
-
-add_action('wp_ajax_nopriv_marinara_blog_more_post_ajax', 'marinara_blog_more_post_ajax');
-add_action('wp_ajax_marinara_blog_more_post_ajax', 'marinara_blog_more_post_ajax');
- 
-if (!function_exists('marinara_blog_more_post_ajax')) {
-	function marinara_blog_more_post_ajax(){
- 
-	    $ppp     = (isset($_POST['ppp'])) ? $_POST['ppp'] : 3;
-	    $cat     = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
-	    $offset  = (isset($_POST['offset'])) ? $_POST['offset'] : 5;
- 
-	    $args = array(
-	        'post_type'      => 'post',
-	        'posts_per_page' => $ppp,
-	        'cat'            => $cat,
-	        'offset'          => $offset,
-	    );
- 
-	    $loop = new WP_Query($args);
- 
-	    $out = '';
- 
-	    if ($loop -> have_posts()) :
-	    	while ($loop -> have_posts()) :
-	    		$loop -> the_post();
-		    	
-		    	$category_out = array();
-		    	$categories = get_the_category();
-				foreach ($categories as $category_one) {
-					$category_out[] ='<a href="'.esc_url( get_category_link( $category_one->term_id ) ).'" class="'.strtolower($category_one->name).'">' .$category_one->name.'</a>';
-				}
-				$category_out = implode(', ', $category_out);
- 
-				$cat_out = (!empty($categories)) ? '<span class="cat-links"><span class="screen-reader-text">'.esc_html__('Categories', 'marinara-blog').'</span>'.$category_out.'</span>' : '';
- 
-				$out .= '<div class="article article-count article-wrapper clearfix">
-							<div class="col-sm-5 col-xs-12 article-img-col">
-								<img src="'. wp_get_attachment_url( get_post_thumbnail_id($post->ID) ) .'" alt="'. get_the_title() .'" alt="'. get_the_title() .'" class="full-width">
-								<div class="article-desc">In <span class="category"><i class="fa fa-tag"></i>&nbsp;'. get_the_category( ", " ) .'</span> by <span class="author">';
-								if (esc_attr( get_the_author_meta( 'profile_img', $author->ID ) ) != ''): 
-									$out .= '<img src="'. esc_attr( get_the_author_meta( 'profile_img', $author->ID ) ) .'" class="avatar" alt="Avatar"/>';
-								else:
-									$out .= get_avatar($author->ID,200);
-								endif;
-								$out .= '&nbsp;'. get_the_author_posts_link() .'</span> on <span class="publish-date"><i class="fa fa-calendar"></i> ' . get_the_time( 'F j Y') .'</span></div>
-					      	</div>
-						  	<div class="col-sm-7 col-xs-12">
-								<div class="article-title h3" style="margin-top: 0;"><a href="'. get_the_permalink() .'" title="View More">'. get_the_title() .'</a></div>
-								<div class="article-excerpt">'. get_the_excerpt() .'</div>
-								<div class="article-read-more"><a href="'. get_the_permalink() .'" title="Read More...">'. $post->comment_count . '&nbsp;';
-								$out .= ($post->comment_count==1?'<i class="fa fa-comment"></i>':'<i class="fa fa-comments"></i>');
-								$out .= '&nbsp;Read More</a></div>
-							</div>
-					    </div>';
- 
-	    	endwhile;
-	    endif;
- 
-	    wp_reset_postdata();
- 
-	    wp_die($out);
-	}
-}
-
-function marinara_blog_ajaxLoadMorePostsJs(){
-	?>
-	<script>
-var jQuerycontent = jQuery('.ajax_posts');
-var jQueryloader = jQuery('#more_posts');
-var cat = jQueryloader.data('category');
-var ppp = 3;
-var offset = jQuery('.blog-listing-wrapper').find('.article').length;
- 
-jQueryloader.on( 'click', marinara_blog_load_ajax_posts );
- 
-function marinara_blog_load_ajax_posts() {
-	if (!(jQueryloader.hasClass('post_loading_loader') || jQueryloader.hasClass('post_no_more_posts'))) {
-		jQuery.ajax({
-			type: 'POST',
-			dataType: 'html',
-			url: '<?php echo admin_url( 'admin-ajax.php'); ?>',
-			data: {
-				'cat': cat,
-				'ppp': ppp,
-				'offset': offset,
-				'action': 'marinara_blog_more_post_ajax'
-			},
-			beforeSend : function () {
-				jQueryloader.addClass('post_loading_loader').html('<i class="fa fa-cog fa-spin"></i>');
-			},
-			success: function (data) {
-				var jQuerydata = jQuery(data);
-				console.log(jQuerydata);
-				if (jQuerydata.length) {
-					var jQuerynewElements = jQuerydata.css({ opacity: 0 });
-					jQuerycontent.append(jQuerynewElements);
-					jQuerynewElements.animate({ opacity: 1 });
-					jQueryloader.removeClass('post_loading_loader').html('Load More');
-				} else {
-					jQueryloader.removeClass('post_loading_loader').addClass('post_no_more_posts').html('No older posts found');
-				}
-			},
-			error : function (jqXHR, textStatus, errorThrown) {
-				jQueryloader.html(jQuery.parseJSON(jqXHR.responseText) + ' :: ' + textStatus + ' :: ' + errorThrown);
-				console.log(jqXHR);
-			},
-		});
-	}
-	offset += ppp;
-	return false;
-}
-	</script>
-	<?php
-}
-add_action('wp_footer', 'marinara_blog_ajaxLoadMorePostsJs');
 
 function strip_shortcode_gallery( $content ) {
     preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches, PREG_SET_ORDER );

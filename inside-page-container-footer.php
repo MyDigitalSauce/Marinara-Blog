@@ -10,7 +10,8 @@
 <div class="clearfix"></div>
 <footer class="site-footer footer-row row">
   <div class="footer-logo-col col-xs-12 text-center">
-    <?php $footerImg = get_theme_mod('footer_image'); if ( $footerImg !== "" ): ?>
+    <?php $footerImg = get_theme_mod('footer_image');
+    if ( $footerImg ): ?>
       <img src="<?php echo $footerImg; ?>" alt="<?php bloginfo('name'); ?>" class="footer-logo">
     <?php else: ?>
       <h2 class="footer-bloginfo-name footer-clr"><?php echo bloginfo('name'); ?></h2>

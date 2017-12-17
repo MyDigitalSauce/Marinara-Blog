@@ -731,7 +731,7 @@ function admin_customizable_theme_css(){
   if (get_theme_mod('footer_clr')){
     $footerClr = get_theme_mod('footer_clr');
   } else {
-    $footerClr = '#fff';    
+    $footerClr = '#444';    
   }
   if (get_theme_mod('footer_highlight_clr')){
     $footerHighlightClr = get_theme_mod('footer_highlight_clr');

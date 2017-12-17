@@ -57,7 +57,8 @@ $enableAuthorTab = get_theme_mod('enable_author_tab'); ?>
 			<?php if ($enableAuthorTab) { ?>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="authors">
-						<?php echo marinara_blog_authors_func(); ?>
+						<?php echo marinara_blog_authors_func( ); ?>
+						Test
 					</div>
 				</div>
 			<?php } ?>

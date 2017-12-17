@@ -38,7 +38,7 @@ $feat_img_url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
 				<?php do_shortcode('[breadcrumb]'); ?>
 			</div>
 			<div class="social-shares-col col-xs-12 col-sm-6 grey-bg">
-				<?php echo marinara_blog_social_shares(); ?>
+				<?php do_shortcode('[marinara_blog_social_shares]'); ?>
 			</div>
 		</div>
 		<div class="page-content-col col-xs-12">
