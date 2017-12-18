@@ -187,7 +187,7 @@ function marinara_blog_scripts() {
 
 	wp_enqueue_style('marinara_blog-style', get_stylesheet_uri(),
     	array('bootstrap-css','marinara_blog-font-awesome', 'marinara_blog-google-fonts', 'local-fonts'),
-    	'1.0.6'
+    	'1.1.0'
     	);
 
 	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.5', true);
