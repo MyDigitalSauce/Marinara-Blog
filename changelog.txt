@@ -1,5 +1,8 @@
 Marinara Blog WP Theme Change Log
 
+v 1.1.0
+- Update theme style.css Description and tags
+
 v 1.0.9
 - In .js files replaced $ with jQuery
 
