@@ -23,9 +23,9 @@ $total_results = $wp_query->found_posts; ?>
     </div>
 	<div class="inside-page-container search-page-container container">
 		<div class="breadcrumb-search-photos-row sm-row clearfix grey-bg">
-			<div class="breadcrumb-col col-xs-12 col-sm-6">
-				<?php do_shortcode('[breadcrumb]'); ?>
-			</div>
+            <div class="breadcrumb-col col-xs-12 col-sm-6">
+                <?php echo marinara_blog_breadcrumb(); ?>
+            </div>
             <?php if ($total_results > 1): ?>
     			<div class="col-xs-12 col-sm-6 filter-results-search-col">
     				<input class="full-width filter-results-search" type="text" placeholder="Filter Search Results By Title:"/>

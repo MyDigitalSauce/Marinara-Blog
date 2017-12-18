@@ -25,7 +25,7 @@ if ( $author_avatar_url == '') {
 	$author_avatar = get_avatar($author->ID,96,'',get_the_author_meta('display_name'));
 }
 
-$instagram_id = esc_attr( get_the_author_meta( 'profile_instagram_id', $author->ID ) );
+// $instagram_id = esc_attr( get_the_author_meta( 'profile_instagram_id', $author->ID ) );
 /* determining user role */
 if (user_can( $author->ID, 'remove_users' )):
 	$author_role = '<i class="fa fa-life-saver"></i> Admin';
@@ -75,8 +75,5 @@ $author_post_count = count_user_posts( $author->ID , 'post' );
 			<li><i class="fa-li fa fa-soundcloud"></i> <a href="<?php echo $soundcloud_url; ?>" title="View <?php echo $author_name; ?>'s SoundCloud" target="_blank"><?php echo $soundcloud_url; ?></a></li>
 		<?php endif; ?>
 	</ul>
-	</div>
-	<div class="author-instagram-feed-col col-xs-12">
-		<?php if ($instagram_id){ echo do_shortcode('[instagram-feed id="'.$instagram_id.'"]'); } ?>
 	</div>
 </div>

@@ -35,10 +35,10 @@ $featImgURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
 	<div class="inside-page-container page-container container">
 		<div class="breadcrumb-row sm-row clearfix grey-bg">
 			<div class="breadcrumb-col col-xs-12 col-sm-6">
-				<?php do_shortcode('[breadcrumb]'); ?>
+				<?php echo marinara_blog_breadcrumb(); ?>
 			</div>
 			<div class="social-shares-col col-xs-12 col-sm-6 grey-bg">
-				<?php do_shortcode('[marinara_blog_social_shares]'); ?>
+				<?php echo marinara_blog_social_shares_buttons(); ?>
 			</div>
 		</div>
 		<div class="page-sidebar-col col-xs-12 col-sm-4">
