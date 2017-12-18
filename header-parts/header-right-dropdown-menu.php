@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
   jQuery('.dropdown-right-sidebar-menu-wrapper .menu-item').each(function(){
   /* if the menu item has a parent with a class of navbar-nav */
   if ( jQuery(this).parent().hasClass('navbar-nav') ){
-    var $this = $(this);
+    var $this = jQuery(this);
     var aTarget = '';
     var aText = jQuery(this).children('a').text();
     var aHref = jQuery(this).children('a').attr('href');

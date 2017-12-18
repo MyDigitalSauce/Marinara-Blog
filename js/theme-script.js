@@ -34,8 +34,8 @@ function vidRescale(e){
   /* aspectRatio = 16:9 */
   var aspectRatioW = 16;
   var aspectRatioH = 9;
-  $(e).attr('width', '100%');
-  var w = $(e).width();
+  jQuery(e).attr('width', '100%');
+  var w = jQuery(e).width();
   var h = (w*aspectRatioH)/aspectRatioW;
   jQuery(e).height(h);
 }
