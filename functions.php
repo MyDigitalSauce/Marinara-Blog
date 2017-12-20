@@ -26,9 +26,9 @@ function marinara_blog_sanitize_text( $text ) {
 /*
 * Sanitize TextArea
 =====================================*/
-function marinara_blog_sanitize_textarea( $text ) {
-    return esc_textarea( $text );
-}
+// function marinara_blog_sanitize_textarea( $text ) {
+//     return esc_textarea( $text );
+// }
 
 if ( ! function_exists( 'marinara_blog_setup' ) ) :
 /**

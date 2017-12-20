@@ -60,7 +60,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'google_analytics_code',
     array(          
-      'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -84,7 +84,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'enable_user_col',
         array(
             'type'       => 'theme_mod',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
         )
     );
     $wp_customize->add_control(
@@ -105,7 +105,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'show_by_author_on_blog_listing',
         array(
             'type'       => 'theme_mod',
-'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
         )
     );
     $wp_customize->add_control(
@@ -126,7 +126,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
         'enable_author_tab',
         array(
             'type'       => 'theme_mod',
-'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
         )
     );
     $wp_customize->add_control(
@@ -149,7 +149,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -169,7 +169,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'        
     )
   );
   $wp_customize->add_control(
@@ -189,7 +189,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -209,7 +209,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'       
     )
   );
   $wp_customize->add_control(
@@ -229,7 +229,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -249,7 +249,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'       
     )
   );
   $wp_customize->add_control(
@@ -269,7 +269,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'        
     )
   );
   $wp_customize->add_control(
@@ -289,7 +289,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -309,7 +309,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'       
     )
   );
   $wp_customize->add_control(
@@ -329,7 +329,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'      
     )
   );
   $wp_customize->add_control(
@@ -349,7 +349,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'          
     )
   );
   $wp_customize->add_control(
@@ -369,7 +369,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'           => '',
         'transport'         => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'          
+        'sanitize_callback' => 'sanitize_text_field'          
     )
   );
   $wp_customize->add_control(
@@ -396,7 +396,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#444',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'  
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -415,7 +415,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#f50',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'  
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -434,7 +434,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#f50',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text'  
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -457,7 +457,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
   $wp_customize->add_setting(
     'marinara_blog_custom_css',
     array(          
-        'sanitize_callback' => 'marinara_blog_sanitize_textarea'          
+        'sanitize_callback' => 'sanitize_text_field'         
     )
   );
   $wp_customize->add_control(
@@ -478,7 +478,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#444',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -503,7 +503,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#444',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field' 
     )
   );
   $wp_customize->add_control(
@@ -522,7 +522,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#fff',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -547,7 +547,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#444',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -571,7 +571,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     'footer_image',
     array(
     'default'         => '',
-    'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     // 'default'         => get_template_directory_uri() . '/img/logo.png',
     //'transport'       => 'postMessage'
     )
@@ -593,7 +593,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#fff',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
@@ -612,7 +612,7 @@ function marinara_blog_register_theme_customizer( $wp_customize ) {
     array(
         'default'         => '#fff',
         'transport'       => 'postMessage',
-        'sanitize_callback' => 'marinara_blog_sanitize_text' 
+        'sanitize_callback' => 'sanitize_text_field'
     )
   );
   $wp_customize->add_control(
