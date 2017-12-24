@@ -27,7 +27,7 @@ $author = get_user_by( 'slug', get_query_var( 'author_name' ) ); ?>
 					<?php get_template_part('template-parts/content', 'author-about'); ?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="blog">
-					<?php get_template_part('template-parts/content', 'author-blog-post-listing'); ?>
+					<?php get_template_part('template-parts/content', 'blog-post-listing'); ?>
 				</div>
 			</div>
 		</div><!-- end of <div class="single-post-types-tab-col -->

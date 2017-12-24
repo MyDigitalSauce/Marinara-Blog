@@ -13,7 +13,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
 	wp_reset_query();
 	$articlesArgs = array(
 		'post_type' => 'post',
-		'paged' => get_query_var('page') ? get_query_var('page') : 1
+		'paged' => get_query_var('page', 1)
 	);
 	$articlesQuery = new WP_Query( $articlesArgs );
 	$articleCnt = 0;

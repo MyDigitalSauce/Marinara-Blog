@@ -1,5 +1,12 @@
 Marinara Blog WP Theme Change Log
 
+v 1.1.2
+- Fixed anywhere where custom post types arent appearing correctly
+- Fixed glyphicons fonts
+
+v 1.1.1
+- Updated screenshot.png and customizer & functions.php update sanitize_callback
+
 v 1.1.0
 - Update theme style.css Description and tags
 
