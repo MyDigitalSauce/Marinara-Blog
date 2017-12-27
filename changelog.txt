@@ -1,5 +1,8 @@
 Marinara Blog WP Theme Change Log
 
+v 1.1.3
+- Fixed searching post listing
+
 v 1.1.2
 - Fixed anywhere where custom post types arent appearing correctly
 - Fixed glyphicons fonts

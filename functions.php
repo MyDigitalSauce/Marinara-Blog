@@ -357,7 +357,7 @@ function marinara_blog_authors_func(  ){
 		$author_posted_articles_cnt = count_user_posts( $author->ID , 'post' );
 		$author_email = esc_html($author->user_email);
 		$author_name = $author->display_name;
-		$author_url = get_site_url().'/blog/author/'.$author->user_nicename;
+		$author_url = get_author_posts_url( $author->ID );
 		?>
 		<div class="col-xs-12 col-md-6">
 			<div class="author-row author-row-<?php echo $author->ID; ?> row">

@@ -6,23 +6,16 @@
  *
  * @package Marinara_Blog
  */
-$showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); 
-?>
-<!-- post type post -->
+$showByAuthor = get_theme_mod('show_by_author_on_blog_listing'); ?>
+
 <div class="blog-listing-wrapper wrapper">
-	<?php $sQuery = get_search_query();
-	$articlesArgs = array(
-		's' => $sQuery,
-		'post_type' => 'post',
-	);
-	$articlesQuery = new WP_Query( $articlesArgs );
+	<?php
 	$articleCnt = 0;
-	if ( $articlesQuery->have_posts() ):
-		while ( $articlesQuery->have_posts() ) : $articlesQuery->the_post();
-			$post_format = get_post_format();
-			$feat_img_url  = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
-			$author_avatar = get_avatar( get_the_author_meta('ID'), 200 ); ?>
-	    <div class="article article-<?php echo $articleCnt; ?> <?php if (isset($post_format) && $post_format != ""): echo 'article-'.$post_format; endif; ?> article-wrapper clearfix" data-article-title="<?php the_title_attribute(); ?>" >
+	while ( have_posts() ) : the_post();
+		$post_format = get_post_format();
+		$feat_img_url  = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+		$author_avatar = get_avatar( get_the_author_meta('ID'), 200 ); ?>
+	    <div class="article article-<?php echo $articleCnt; ?> <?php if (isset($post_format) && $post_format != ""): echo 'article-'.$post_format; endif; ?> article-wrapper clearfix">
 	    	<?php if (isset($post_format) && $post_format == "aside") { ?>
 				<div class="article-desc col-xs-12">
 					<?php if ($showByAuthor): ?>
@@ -139,8 +132,7 @@ $showByAuthor = get_theme_mod('show_by_author_on_blog_listing');
 	    	<?php } ?>
 	    </div>
 		<?php $articleCnt++; ?>
-		<?php endwhile; // End of the loop. ?>
-	<?php else: ?>
-		<p>No Results Found</p>
-	<?php endif; ?>
+	<?php
+	endwhile; // End of the loop.
+	?>
 </div><!-- end of <div class="blog-listing-wrapper wrapper"> -->

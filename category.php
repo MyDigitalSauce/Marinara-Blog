@@ -18,8 +18,8 @@ $cat_id = get_query_var('cat'); ?>
     </div>
 	<div class="inside-page-container category-page-container container">
 		<div class="blog-post-listing-col col-xs-12 col-sm-8">
-			<?php get_template_part('template-parts/content', 'blog-post-listing'); ?>
-		</div><!-- end of <div class="blog-post-listing-col -->
+			<?php get_template_part('template-parts/content', 'category-post-listing'); ?>
+		</div><!-- end of <div class="category-post-listing-col -->
 		<div class="page-sidebar-col col-xs-12 col-sm-4">
 			<?php get_sidebar(); ?>
 		</div><!-- end of <div class="page-sidebar-col -->
